@@ -710,12 +710,6 @@ def _merge_history_item(history, date, item_id, actual=None, pred_pct=None):
         entry["actual"] = actual
     if pred_pct is not None:
         entry["pred_pct"] = pred_pct
-    # 코스피/코스닥은 기존 하단 추세선(svg_trend_chart)이 top-level 필드를 읽으므로 같이 채워둔다.
-    if item_id in ("kospi", "kosdaq"):
-        if actual is not None:
-            history.setdefault(date, {})[item_id] = actual
-        if pred_pct is not None:
-            history.setdefault(date, {})[f"{item_id}_pred_pct"] = pred_pct
 
 
 def _record_us_accuracy(history, date, us_items, us_outlook, us_stock_items, us_stock_outlook):
@@ -1160,101 +1154,6 @@ def stock_group_block(title, items, news_map=None, outlook=None, tag=None,
       </div>"""
 
 
-def svg_trend_chart(history):
-    dates = sorted(history.keys())
-    if len(dates) < 2:
-        return (
-            '<p class="chart-empty">최근 며칠간의 데이터가 쌓이면 코스피 · 코스닥 추세선이 여기 표시됩니다 '
-            "(평일마다 자동 누적).</p>"
-        )
-    dates = dates[-14:]
-    base_kospi = history[dates[0]]["kospi"]
-    base_kosdaq = history[dates[0]]["kosdaq"]
-    idx_kospi = [history[d]["kospi"] / base_kospi * 100 for d in dates]
-    idx_kosdaq = [history[d]["kosdaq"] / base_kosdaq * 100 for d in dates]
-
-    # 그날 아침 AI가 예측한 등락률을, 그 전날 실제 종가에 적용해 같은 지수화 스케일로 환산한다
-    # (없는 날은 None) -- 실선(실제)과 겹쳐 그려서 예측이 얼마나 맞았는지 한눈에 비교할 수 있게 한다.
-    def pred_series(field, base):
-        out = [None] * len(dates)
-        for i in range(1, len(dates)):
-            prev, cur = history[dates[i - 1]], history[dates[i]]
-            pct = cur.get(field)
-            prev_val = prev.get("kospi" if field.startswith("kospi") else "kosdaq")
-            if pct is not None and prev_val:
-                out[i] = (prev_val * (1 + pct / 100)) / base * 100
-        return out
-
-    pred_kospi = pred_series("kospi_pred_pct", base_kospi)
-    pred_kosdaq = pred_series("kosdaq_pred_pct", base_kosdaq)
-
-    width, height = CHART_WIDTH, 190
-    pad_l, pad_r, pad_t, pad_b = 40, 92, 16, 26
-    plot_w, plot_h = width - pad_l - pad_r, height - pad_t - pad_b
-    all_vals = idx_kospi + idx_kosdaq + [v for v in pred_kospi + pred_kosdaq if v is not None]
-    v_min, v_max = min(all_vals), max(all_vals)
-    v_span = max(v_max - v_min, 1)
-    v_min -= v_span * 0.15
-    v_max += v_span * 0.15
-    v_span = v_max - v_min
-
-    def xy(i, v):
-        x = pad_l + (i / (len(dates) - 1)) * plot_w
-        y = pad_t + plot_h - ((v - v_min) / v_span) * plot_h
-        return x, y
-
-    def path_for(vals):
-        pts = [xy(i, v) for i, v in enumerate(vals)]
-        d = f"M {pts[0][0]:.1f} {pts[0][1]:.1f} " + " ".join(f"L {x:.1f} {y:.1f}" for x, y in pts[1:])
-        return d, pts
-
-    kospi_d, kospi_pts = path_for(idx_kospi)
-    kosdaq_d, kosdaq_pts = path_for(idx_kosdaq)
-
-    def pred_markers(pred_vals, actual_vals, color, label):
-        out = []
-        for i, pv in enumerate(pred_vals):
-            if pv is None:
-                continue
-            x, y = xy(i, pv)
-            err = pred_vals[i] - actual_vals[i]
-            out.append(
-                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="var(--paper-raised)" stroke="{color}" '
-                f'stroke-width="2" stroke-dasharray="2 2"><title>{label} {dates[i]} AI 예측 vs 실제 '
-                f'(오차 {err:+.1f}pt)</title></circle>'
-            )
-        return "".join(out)
-
-    pred_marks = (
-        pred_markers(pred_kospi, idx_kospi, "var(--series-1)", "코스피")
-        + pred_markers(pred_kosdaq, idx_kosdaq, "var(--series-2)", "코스닥")
-    )
-    has_pred = any(v is not None for v in pred_kospi + pred_kosdaq)
-    grid = f'<line x1="{pad_l}" y1="{pad_t + plot_h}" x2="{pad_l + plot_w}" y2="{pad_t + plot_h}" class="chart-baseline"/>'
-    date_labels = (
-        f'<text x="{pad_l}" y="{height - 6}" text-anchor="start" class="chart-muted">{dates[0][5:]}</text>'
-        f'<text x="{pad_l + plot_w}" y="{height - 6}" text-anchor="end" class="chart-muted">{dates[-1][5:]}</text>'
-    )
-    kospi_end, kosdaq_end = kospi_pts[-1], kosdaq_pts[-1]
-    end_dots = (
-        f'<circle cx="{kospi_end[0]:.1f}" cy="{kospi_end[1]:.1f}" r="4" fill="var(--series-1)" stroke="var(--paper-raised)" stroke-width="2"/>'
-        f'<circle cx="{kosdaq_end[0]:.1f}" cy="{kosdaq_end[1]:.1f}" r="4" fill="var(--series-2)" stroke="var(--paper-raised)" stroke-width="2"/>'
-        f'<text x="{kospi_end[0]+9:.1f}" y="{kospi_end[1]+4:.1f}" class="chart-val">코스피 {idx_kospi[-1]:.1f}</text>'
-        f'<text x="{kosdaq_end[0]+9:.1f}" y="{kosdaq_end[1]+16:.1f}" class="chart-val">코스닥 {idx_kosdaq[-1]:.1f}</text>'
-    )
-    pred_legend = ' · <span style="border:1.5px dashed var(--muted);border-radius:50%;width:8px;height:8px;display:inline-block"></span> AI 예측' if has_pred else ""
-    return (
-        '<div class="chart-legend"><span class="dot series1"></span>코스피'
-        f'<span class="dot series2"></span>코스닥{pred_legend}'
-        f'<span class="chart-note">첫날({dates[0]})=100 기준 지수화</span></div>'
-        f'<svg viewBox="0 0 {width} {height}" class="trend-chart" role="img" aria-label="코스피 코스닥 추세">'
-        f"{grid}{date_labels}"
-        f'<path d="{kospi_d}" class="trend-line series1"/>'
-        f'<path d="{kosdaq_d}" class="trend-line series2"/>'
-        f"{pred_marks}{end_dots}</svg>"
-    )
-
-
 def render_part(label, part_no, time_label, doc):
     if not doc:
         return f"""
@@ -1380,7 +1279,7 @@ HTML_SHELL = """<!doctype html>
   .chart-tag.tag-end {{ color:var(--muted); border-color:var(--line); opacity:.7; }}
   .chart-update-note {{ font-family:var(--font-mono); font-size:11px; color:var(--muted); white-space:nowrap; margin-left:auto; }}
   .chart-summary {{ margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line); font-size:14px; color:var(--navy-700); }}
-  .bar-chart, .trend-chart {{ width:100%; height:auto; display:block; }}
+  .bar-chart {{ width:100%; height:auto; display:block; }}
   .chart-cat {{ font-size:13.5px; font-weight:600; fill:var(--navy-950); font-family:var(--font-body); }}
   .chart-val {{ font-size:13px; font-weight:700; fill:var(--navy-950); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
   .chart-val-inside {{ font-size:13px; font-weight:700; fill:#fff; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
@@ -1389,11 +1288,6 @@ HTML_SHELL = """<!doctype html>
   .chart-muted {{ font-size:12px; fill:var(--muted); }}
   .chart-baseline {{ stroke:var(--line); stroke-width:1; }}
   .chart-empty {{ color:var(--muted); font-size:14px; margin:0; }}
-  .chart-legend {{ display:flex; align-items:center; gap:14px; font-size:12px; color:var(--muted); margin:0 0 8px; font-family:var(--font-mono); }}
-  .chart-legend .dot {{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; }}
-  .chart-legend .dot.series1 {{ background:var(--series-1); }}
-  .chart-legend .dot.series2 {{ background:var(--series-2); }}
-  .chart-note {{ margin-left:auto; }}
 
   .outlook-disclaimer {{ margin:0 0 8px; font-size:11px; color:var(--muted); font-style:italic; }}
   .chart-val.predicted, .chart-val-inside.predicted, .chart-val-sub.predicted {{ font-style:italic; }}
@@ -1402,12 +1296,8 @@ HTML_SHELL = """<!doctype html>
   .stock-news li {{ font-size:13px; color:var(--navy-700); margin-bottom:6px; }}
   .stock-news li:last-child {{ margin-bottom:0; }}
   .stock-news strong {{ color:var(--navy-950); font-weight:700; }}
-  .trend-line {{ fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }}
-  .trend-line.series1 {{ stroke:var(--series-1); }}
-  .trend-line.series2 {{ stroke:var(--series-2); }}
 
   .ai-note {{ margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }}
-  .accuracy-heading {{ font-family:var(--font-display); font-size:16px; font-weight:600; margin:20px 0 6px; padding-top:16px; border-top:1px solid var(--line); }}
   .accuracy-table {{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }}
   .accuracy-table th {{ text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }}
   .accuracy-table td {{ padding:6px 8px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
@@ -1436,13 +1326,10 @@ HTML_SHELL = """<!doctype html>
   </div>
   <section class="part" style="margin-bottom:28px;">
     <div class="part-head">
-      <div><p class="label">AI 예측 · 실제 정확도</p><h2>최근 코스피 · 코스닥 흐름 (AI 예측 vs 실제)</h2></div>
+      <div><p class="label">AI 예측 · 실제 정확도</p><h2>지수·종목별 AI 예측 정확도</h2></div>
       <time></time>
     </div>
     <div class="part-body">
-      <p class="ai-note">매일 아침 AI가 예측한 등락률(점선 원)을 그날 실제 마감값(실선)과 겹쳐 보여줍니다 -- 원이 실선에 가까울수록 예측이 정확했다는 뜻입니다.</p>
-      {trend_chart}
-      <h3 class="accuracy-heading">지수·종목별 AI 예측 정확도</h3>
       <p class="ai-note">방향 적중률 = 예측한 상승/하락 방향이 실제와 맞은 비율. 평균 오차 = 예측 등락률과 실제 등락률 차이의 평균(%p).</p>
       {accuracy_table}
     </div>
@@ -1487,10 +1374,9 @@ def render_html(data, history):
     generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
     part1 = render_part("전일 마감 요약", 1, "06:00", data.get("yesterday"))
     part2 = render_part("금일 전망 · 주목 이슈", 2, "08:00", data.get("today"))
-    trend = svg_trend_chart(history)
     accuracy_table = accuracy_table_html(history)
     html = HTML_SHELL.format(
-        generated_at=generated_at, part_yesterday=part1, part_today=part2, trend_chart=trend,
+        generated_at=generated_at, part_yesterday=part1, part_today=part2,
         accuracy_table=accuracy_table,
     )
     with open(HTML_PATH, "w", encoding="utf-8") as f:

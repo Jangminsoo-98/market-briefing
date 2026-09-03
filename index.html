@@ -53,7 +53,7 @@
   .chart-tag.tag-end { color:var(--muted); border-color:var(--line); opacity:.7; }
   .chart-update-note { font-family:var(--font-mono); font-size:11px; color:var(--muted); white-space:nowrap; margin-left:auto; }
   .chart-summary { margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line); font-size:14px; color:var(--navy-700); }
-  .bar-chart, .trend-chart { width:100%; height:auto; display:block; }
+  .bar-chart { width:100%; height:auto; display:block; }
   .chart-cat { font-size:13.5px; font-weight:600; fill:var(--navy-950); font-family:var(--font-body); }
   .chart-val { font-size:13px; font-weight:700; fill:var(--navy-950); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
   .chart-val-inside { font-size:13px; font-weight:700; fill:#fff; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
@@ -62,11 +62,6 @@
   .chart-muted { font-size:12px; fill:var(--muted); }
   .chart-baseline { stroke:var(--line); stroke-width:1; }
   .chart-empty { color:var(--muted); font-size:14px; margin:0; }
-  .chart-legend { display:flex; align-items:center; gap:14px; font-size:12px; color:var(--muted); margin:0 0 8px; font-family:var(--font-mono); }
-  .chart-legend .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; }
-  .chart-legend .dot.series1 { background:var(--series-1); }
-  .chart-legend .dot.series2 { background:var(--series-2); }
-  .chart-note { margin-left:auto; }
 
   .outlook-disclaimer { margin:0 0 8px; font-size:11px; color:var(--muted); font-style:italic; }
   .chart-val.predicted, .chart-val-inside.predicted, .chart-val-sub.predicted { font-style:italic; }
@@ -75,12 +70,8 @@
   .stock-news li { font-size:13px; color:var(--navy-700); margin-bottom:6px; }
   .stock-news li:last-child { margin-bottom:0; }
   .stock-news strong { color:var(--navy-950); font-weight:700; }
-  .trend-line { fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
-  .trend-line.series1 { stroke:var(--series-1); }
-  .trend-line.series2 { stroke:var(--series-2); }
 
   .ai-note { margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }
-  .accuracy-heading { font-family:var(--font-display); font-size:16px; font-weight:600; margin:20px 0 6px; padding-top:16px; border-top:1px solid var(--line); }
   .accuracy-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
   .accuracy-table th { text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }
   .accuracy-table td { padding:6px 8px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
@@ -96,7 +87,7 @@
   <header class="page">
     <p class="eyebrow">KOSPI · KOSDAQ · US MARKETS (CLOUD / FREE)</p>
     <h1 class="title">데일리 마켓 브리핑(클라우드)</h1>
-    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 (마지막 갱신: 2026-09-03 21:47)</p>
+    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 (마지막 갱신: 2026-09-03 22:00)</p>
     <ul class="update-schedule">
       <li>· 06:00 전일 마감 요약 (최근 AI 예측·실제 정확도)</li>
       <li>· 08:30 국내 지수·종목 오늘 전망</li>
@@ -199,13 +190,10 @@
   </div>
   <section class="part" style="margin-bottom:28px;">
     <div class="part-head">
-      <div><p class="label">AI 예측 · 실제 정확도</p><h2>최근 코스피 · 코스닥 흐름 (AI 예측 vs 실제)</h2></div>
+      <div><p class="label">AI 예측 · 실제 정확도</p><h2>지수·종목별 AI 예측 정확도</h2></div>
       <time></time>
     </div>
     <div class="part-body">
-      <p class="ai-note">매일 아침 AI가 예측한 등락률(점선 원)을 그날 실제 마감값(실선)과 겹쳐 보여줍니다 -- 원이 실선에 가까울수록 예측이 정확했다는 뜻입니다.</p>
-      <p class="chart-empty">최근 며칠간의 데이터가 쌓이면 코스피 · 코스닥 추세선이 여기 표시됩니다 (평일마다 자동 누적).</p>
-      <h3 class="accuracy-heading">지수·종목별 AI 예측 정확도</h3>
       <p class="ai-note">방향 적중률 = 예측한 상승/하락 방향이 실제와 맞은 비율. 평균 오차 = 예측 등락률과 실제 등락률 차이의 평균(%p).</p>
       <p class="chart-empty">최근 며칠간의 데이터가 쌓이면 지수·종목별 AI 예측 정확도가 여기 표시됩니다 (평일마다 자동 누적).</p>
     </div>
