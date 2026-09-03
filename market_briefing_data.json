@@ -205,7 +205,7 @@
     "ai_summary": true
   },
   "today": {
-    "updated_at": "2026-09-03 21:24 KST",
+    "updated_at": "2026-09-03 22:34 KST",
     "kr": {
       "status": "CLOSE",
       "items": [
@@ -239,24 +239,37 @@
       "items": [
         {
           "label": "다우존스",
-          "pct": -0.75,
-          "value": "53,061.95",
-          "change": "-401.93"
+          "pct": -0.21,
+          "value": "53,457.15",
+          "change": "-112.29"
         },
         {
           "label": "S&P500",
-          "pct": -0.12,
-          "value": "7,666.60",
-          "change": "-9.10"
+          "pct": -0.26,
+          "value": "7,710.58",
+          "change": "-20.41"
         },
         {
           "label": "나스닥",
-          "pct": 0.34,
-          "value": "26,217.83",
-          "change": "+87.63"
+          "pct": -0.57,
+          "value": "26,390.35",
+          "change": "-150.99"
         }
       ],
-      "outlook": null,
+      "outlook": {
+        "dow": {
+          "pct": 0.1,
+          "reason": "다우 선물 지수가 상승세를 보이고 있으나 전일 하락에 따른 숨고르기 장세가 이어질 전망입니다."
+        },
+        "sp500": {
+          "pct": -0.1,
+          "reason": "S&P500 선물이 증시 숨고르기 속 소폭 하락하며 관망세가 짙은 혼조세를 나타내고 있습니다."
+        },
+        "nasdaq": {
+          "pct": -0.3,
+          "reason": "전일 기술주 중심의 약세 마감과 고용보고서 대기에 따른 경계감이 부담으로 작용하고 있습니다."
+        }
+      },
       "reasons": null,
       "link": null
     },
@@ -337,55 +350,76 @@
           "code": "AAPL",
           "label": "애플",
           "pct": 3.67,
-          "value": "$324.96",
-          "change": "+11.51"
+          "value": "$326.12",
+          "change": "+11.54"
         },
         {
           "code": "MSFT",
           "label": "마이크로소프트",
-          "pct": 0.09,
-          "value": "$496.82",
-          "change": "+0.45"
+          "pct": 0.41,
+          "value": "$507.13",
+          "change": "+2.07"
         },
         {
           "code": "NVDA",
           "label": "엔비디아",
-          "pct": 7.04,
-          "value": "$224.41",
-          "change": "+14.75"
+          "pct": -0.36,
+          "value": "$227.17",
+          "change": "-0.81"
         },
         {
           "code": "AMZN",
           "label": "아마존",
-          "pct": -2.04,
-          "value": "$254.98",
-          "change": "-5.30"
+          "pct": 0.58,
+          "value": "$257.75",
+          "change": "+1.49"
         },
         {
           "code": "GOOGL",
           "label": "구글",
-          "pct": -1.43,
-          "value": "$337.12",
-          "change": "-4.88"
+          "pct": 0.72,
+          "value": "$343.10",
+          "change": "+2.45"
         }
       ],
       "news": {
         "AAPL": {
-          "reason": "애플은 주주환원과 주가 상승이 동시에 이루어지며 상승했습니다.",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFA0QURnR1l5aEZSZFIxS3k1Z0x3U0M0ZmFHcFhXaXdHVnJxeTM3QWZwZzBNc1gyV05LSWNrUno3b3hXWDZ4RlRhM0NVZjZvWUVJVGpJWm5IU2x1ZmJCLTBIX181WlVRX214eG5zeVNISVpmLTdPODNBSw?oc=5"
+          "reason": "새로운 CEO 보상 패키지 도입 소식이 전해지며 주가가 3.67% 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5KVUNlLUNYaDZDMTBqUkRrNXJsV2NiZUM1NjdHWGpQdjdWcGRyb1NoUzJVZ09TMjZHSkNENjNzLTVrdVBrczA1LUN0T3N6U1dwcGhTYzc3QTRNb05SQWFVS0FMNHZCQmpEcXpYSmt2OVY5d9IBdkFVX3lxTE5SWWpsU1l1SEhWMFpCenp2NkJxZnJaRmlTUnJOWFFMc2pfaW80LUN5a2p2Z1IxWXp1cS1yQkdtWjROc1U4LTkxWHI0Ym1lcnpBWG1yTGlETzAyZ3hKZUxaZGtpMW1yQXJJMVZyQmhzV3lxcFRZMGc?oc=5"
         },
         "MSFT": {
-          "reason": "마이크로소프트는 대대적인 사업부문 개편과 Azure 분기 매출 공개를 앞두고 소폭 상승했습니다.",
+          "reason": "대대적인 사업부문 개편과 Azure 분기 매출 공개를 앞두고 0.41% 올랐습니다.",
           "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOUHJnV0xBWExVSU5BUGlwMUo1VFJ4YldzZ3JoUUVOZnJTdkpOWE42WWl0SjFjRGdfU2l4MndWZG1TUkktTXMxcXVqZHFRQkk5ZzIxbWFPTkxhcFhEZ0s1UThUUEJSSnpqNnlkd2FpU3BKeGFqTnhNRmpNaXZvTUpZZA?oc=5"
         },
-        "NVDA": {
-          "reason": "엔비디아는 주가 급등세를 보이며 큰 폭으로 상승했습니다.",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9RYXU0Y1JQTlBRT1BCdVlnM29CV19hVExFbzBBbjZFVGQ2Q1BNOGc0eUdDbDdVTnJDRjF6MjhXWDlmd3JSa1BZNGM4M3FHeVduT0VtZkdRbko3VEZSTXd2czJjZ1hCdEYxYzJHVTNyYWo4ZmZXU0FR?oc=5"
-        },
+        "NVDA": null,
         "AMZN": null,
-        "GOOGL": null
+        "GOOGL": {
+          "reason": "신규 모델을 내놓았으나 경쟁력에 대한 물음표가 제기되며 제한적인 상승에 그쳤습니다.",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5NWGNZSm9LbFNCR3pjb01xbm9DRm9wVjhZTjZfa212Wm85ZVJvTi1Mb056X1pRLXo1NGcwMkxWMjdFZXZUMXpWVkZtcUdWY2U4d2JHQmxR?oc=5"
+        }
       },
-      "outlook": null
+      "outlook": {
+        "AAPL": {
+          "pct": 0.5,
+          "reason": "전일 CEO 보상 패키지 이슈로 상승했으나 차익실현 매물로 상승 폭은 제한될 것임."
+        },
+        "MSFT": {
+          "pct": 0.3,
+          "reason": "Azure 매출 공개 기대감과 사업 개편 효과가 이어지며 완만한 상승세를 유지할 것임."
+        },
+        "NVDA": {
+          "pct": -0.2,
+          "reason": "뚜렷한 호재가 부재한 가운데 전일의 약보합세가 소폭 이어질 것으로 예상됨."
+        },
+        "AMZN": {
+          "pct": 0.2,
+          "reason": "특별한 뉴스가 없는 상태에서 대형 기술주 흐름에 연동되어 소폭 오를 것임."
+        },
+        "GOOGL": {
+          "pct": -0.4,
+          "reason": "신규 모델 경쟁력에 대한 시장의 의구심이 지속되며 매도 우세가 나타날 수 있음."
+        }
+      }
     },
     "news": {
       "domestic": "오늘 국내 증시는 중동 불안으로 코스피 상승폭이 축소된 가운데 미국 국채금리 상승 등의 영향으로 보험주와 KB금융 등이 강세를 보였습니다. 또한 트럼프의 발언에 철강주가 장 초반 급등하고 반도체 훈풍 속에서 개별 종목 장세가 심화되었습니다.",
@@ -407,7 +441,9 @@
       "이코노미블록",
       "매일경제 마켓",
       "조선일보",
-      "Investing.com 한국어"
+      "Investing.com 한국어",
+      "포춘코리아",
+      "중앙일보"
     ],
     "ai_summary": true
   }

@@ -3,6 +3,40 @@
     "kospi": 6579.48,
     "kosdaq": 790.21,
     "kospi_pred_pct": 0.5,
-    "kosdaq_pred_pct": -0.5
+    "kosdaq_pred_pct": -0.5,
+    "items": {
+      "dow": {
+        "actual": 53457.15,
+        "pred_pct": 0.1
+      },
+      "sp500": {
+        "actual": 7710.58,
+        "pred_pct": -0.1
+      },
+      "nasdaq": {
+        "actual": 26390.35,
+        "pred_pct": -0.3
+      },
+      "AAPL": {
+        "actual": 326.12,
+        "pred_pct": 0.5
+      },
+      "MSFT": {
+        "actual": 507.13,
+        "pred_pct": 0.3
+      },
+      "NVDA": {
+        "actual": 227.17,
+        "pred_pct": -0.2
+      },
+      "AMZN": {
+        "actual": 257.75,
+        "pred_pct": 0.2
+      },
+      "GOOGL": {
+        "actual": 343.1,
+        "pred_pct": -0.4
+      }
+    }
   }
 }
