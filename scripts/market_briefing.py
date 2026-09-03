@@ -932,7 +932,7 @@ def svg_dumbbell_group(items, predicted=False):
 
     baseline = f'<line x1="{cx:.1f}" y1="2" x2="{cx:.1f}" y2="{height - 2}" class="chart-baseline"/>'
     return (
-        f'<svg viewBox="0 0 {width} {height}" class="bar-chart" role="img" aria-label="전일 대비 가격 변동">'
+        f'<svg viewBox="0 0 {width} {height}" width="{width}" height="{height}" class="bar-chart" role="img" aria-label="전일 대비 가격 변동" preserveAspectRatio="xMinYMin meet">'
         f"{baseline}{''.join(rows)}</svg>"
     )
 
@@ -1008,7 +1008,7 @@ def svg_bar_group(items, predicted=False):
 
     baseline = f'<line x1="{cx:.1f}" y1="2" x2="{cx:.1f}" y2="{height - 2}" class="chart-baseline"/>'
     return (
-        f'<svg viewBox="0 0 {width} {height}" class="bar-chart" role="img" aria-label="지수 등락률">'
+        f'<svg viewBox="0 0 {width} {height}" width="{width}" height="{height}" class="bar-chart" role="img" aria-label="지수 등락률" preserveAspectRatio="xMinYMin meet">'
         f"{baseline}{''.join(rows)}</svg>"
     )
 
