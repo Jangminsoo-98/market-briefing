@@ -205,7 +205,7 @@
     "ai_summary": true
   },
   "today": {
-    "updated_at": "2026-09-03 16:45 KST",
+    "updated_at": "2026-09-03 21:24 KST",
     "kr": {
       "status": "CLOSE",
       "items": [
@@ -222,7 +222,16 @@
           "change": "-13.77"
         }
       ],
-      "outlook": null,
+      "outlook": {
+        "kospi": {
+          "pct": 0.5,
+          "reason": "미 국채금리 진정과 반도체 훈풍으로 증시 상방 압력이 우세할 전망입니다."
+        },
+        "kosdaq": {
+          "pct": -0.5,
+          "reason": "제약 바이오 업종의 투자 심리 위축으로 하방 압력이 지속될 것입니다."
+        }
+      },
       "reasons": null,
       "link": null
     },
@@ -231,8 +240,8 @@
         {
           "label": "다우존스",
           "pct": -0.75,
-          "value": "53,061.90",
-          "change": "-401.98"
+          "value": "53,061.95",
+          "change": "-401.93"
         },
         {
           "label": "S&P500",
@@ -290,28 +299,37 @@
         }
       ],
       "news": {
+        "005930": null,
+        "000660": {
+          "reason": "관련 뉴스 헤드라인에 종목명만 언급되어 구체적인 변동 원인을 찾을 수 없습니다.",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQbXQ3SnJwUllKdFFrS09jbDNna0xlVlo4bEpveUdNZmIyZzB6SnJKVS10WDZaRjlfY0JkWFBXWl9jSENFTURLelpoSUZqU3pRWUxQZkE1TS1zZmZBTGlXZ0hBTEh4aVRxQ3BLeE1wTnhzeUZTczNBTV80QWQtZEI2R25FeWYxNFBRR05mUTlLcDJPbHQ4UzQw?oc=5"
+        },
+        "373220": null,
+        "207940": null,
+        "005380": null
+      },
+      "outlook": {
         "005930": {
-          "reason": "\"삼성전자·하이닉스, 지금 사도 되나요?\" 남들 안 살 때 담아야 하는 이유",
-          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE14c0NuNWRVY0RKOWYzYm1BTm5TOWRRRGdRVXdHNGpxd2hNblJoaG15bV9ZcXVyNVdTTGUxa2lqYVBiTFFsczR3ZmZmdVZOeGFoVzRiNXVTOVdtMGdycUE?oc=5"
+          "pct": -0.1,
+          "reason": "전일 특별한 뉴스 없이 소폭 하락하여 오늘은 보합권 내외의 등락이 예상됩니다."
         },
         "000660": {
-          "reason": "[특징주] 삼성전자·SK하이닉스, 美 3대 주가 지수 강세.. '상승'",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
+          "pct": -0.5,
+          "reason": "뚜렷한 악재는 없으나 전일 하락세의 여파로 약보합 흐름이 지속될 것으로 보입니다."
         },
         "373220": {
-          "reason": "LG에너지솔루션 주가, 9월 3일 365,500원 5.18% 상승 마감",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE14WHVWRDF3eW9CM2ZGV1E0SjBjbjRkVzRPaUwyUU1RYlpHbklzZUxVY3V6YXJXX3B5UW5kTzZjWlRNcWpPYlZnVWNqNnU5RnZkZ0NoYm1FX0M5aEpJZHU5SC0zYTlXaDhtRzFMeDNmMXJVZw?oc=5"
+          "pct": 1.2,
+          "reason": "전일 강한 상승 흐름에 이어 추가 매수세가 유입되며 완만한 상승이 기대됩니다."
         },
         "207940": {
-          "reason": "'3조 유증' 삼성바이오로직스, 주주 달래기…\"15조 투자 위한 전략적 선택\"",
-          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE43WlBSRTFZeUpGZVBKLUQ0Vm1BT1NvVUY0eC01TWZMZ1JxRUNoZUN2NHQzQzNvRXV1RTA4STNzY3MyOHhUbzBjSlAzR3ZjZTg?oc=5"
+          "pct": -0.3,
+          "reason": "전일의 조용한 하락세가 이어지며 오늘도 소폭의 약세 흐름이 예상됩니다."
         },
         "005380": {
-          "reason": "현대차 주가, 9월 3일 장중 378,500원 0.13% 상승",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fWXpVZ1BOY29EcURraVNEaGUzOVJTUzFLUElHSkIyWjFCRUZDZEVXSFpsVU5RbnRCYUtaT1Zsb1lJZEJuVXd5ajZLVVUyUE1RaUh6NXhjUUx1ZjliajlRV3FkSnd3N3Q1VnFUemZBeGEyQQ?oc=5"
+          "pct": 0.5,
+          "reason": "전일 완만한 상승 흐름을 이어받아 안정적인 강보합세를 보일 것으로 판단됩니다."
         }
-      },
-      "outlook": null
+      }
     },
     "us_stocks": {
       "items": [
@@ -353,54 +371,44 @@
       ],
       "news": {
         "AAPL": {
-          "reason": "애플(AAPL), 신임 CEO 오자 주가 5주래 최대 상승...헤지 비용 '5달러'",
-          "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SU0NQWGFBaUhGWGQzQjRtS3dDM3FPVzlyRGV5WUNtVVpCZS15VzhsMFc5V2FFRG1UMGo4c0x6eFgxV0FzWV9LMl9B?oc=5"
+          "reason": "애플은 주주환원과 주가 상승이 동시에 이루어지며 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFA0QURnR1l5aEZSZFIxS3k1Z0x3U0M0ZmFHcFhXaXdHVnJxeTM3QWZwZzBNc1gyV05LSWNrUno3b3hXWDZ4RlRhM0NVZjZvWUVJVGpJWm5IU2x1ZmJCLTBIX181WlVRX214eG5zeVNISVpmLTdPODNBSw?oc=5"
         },
         "MSFT": {
-          "reason": "마이크로소프트는 Azure 매출이 처음으로 1,000억 달러를 돌파했다고 발표했습니다.",
-          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQcXRHWjZmSFV0X3ExMmZGbTFKVm00STF0QlBTbjdQN3hWY3I4SFdJeFg2SDFkSWsyUlVBR2RfdW5RbER5eWpvaEZUbW9JYVdtd1QxRWRUemdXZ1NoVFd2NXUzeXNQUE1kblRpa3ZWS096bnNNdHkzaWFYUDNyTmNydFNtalhBRGlDVnpJ?oc=5"
+          "reason": "마이크로소프트는 대대적인 사업부문 개편과 Azure 분기 매출 공개를 앞두고 소폭 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOUHJnV0xBWExVSU5BUGlwMUo1VFJ4YldzZ3JoUUVOZnJTdkpOWE42WWl0SjFjRGdfU2l4MndWZG1TUkktTXMxcXVqZHFRQkk5ZzIxbWFPTkxhcFhEZ0s1UThUUEJSSnpqNnlkd2FpU3BKeGFqTnhNRmpNaXZvTUpZZA?oc=5"
         },
         "NVDA": {
-          "reason": "짐 크레이머, 엔비디아 ‘밸류에이션 저평가’ 지적···대규모 자사주매입 제언",
-          "link": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxQaEZ4c3hlT2ZjeEl3ZF9odWhQdW1wQWlNM0NhdWE3T1NWSHgzb29rN1Fkci02U042N0I3NElMWHk3VWtYS3BkZlhyYlJLSmsxNjAzMEZuQkxQZzY0U3J2ZGFaWmx3QjFONUgzZFg4aHhjV05QcEJfTlYyd2hCVHVENjMwU3dfVjBEX29RMmwwMml6ejZGaXhiMUxaeEw1eDhOUnRMeTV3dUlXemJ6NXBfa2VXeDh5WXN0RncwSGpETE5ESzZxczNzRWxyRXgxUmpUX2g4RjZLN08wWTZxcW5xZXJDRmdSSWo3XzVQUDAtek9xU19LVkE1SFJCV0U1UFVvRHR0WHo5TURaQldFZzdPVjRucFNqeHZOcnN6NGJBM3NxUkJpWWZaMElRUzlYWmtfYnRqVTR2OGk3aXotckxhN29CSjhyUnJO?oc=5"
+          "reason": "엔비디아는 주가 급등세를 보이며 큰 폭으로 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9RYXU0Y1JQTlBRT1BCdVlnM29CV19hVExFbzBBbjZFVGQ2Q1BNOGc0eUdDbDdVTnJDRjF6MjhXWDlmd3JSa1BZNGM4M3FHeVduT0VtZkdRbko3VEZSTXd2czJjZ1hCdEYxYzJHVTNyYWo4ZmZXU0FR?oc=5"
         },
-        "AMZN": {
-          "reason": "\"월급만으론 부족\"…주식 받는 직장인 늘었다",
-          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE0zY0UxYnZzUWFLRTNlbEVTZFdhbEJWT2NyN3dQVnJ3SDhUZjFyOXZSOEtVTy1lZC1zOFFYOGJjOGpicHlvVGEtVEpjVVlfSjU4TmFQaVF1YnZQT2xFdDkyb2F6SnpDQUxsOXBwdzdFeXRBeG1VLVIwT3k1TQ?oc=5"
-        },
-        "GOOGL": {
-          "reason": "구글의 ‘안방 공습’… 독주하던 AI 방산 공룡 흔들렸다",
-          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQaU1tUWhQWEFVRnNheGlmR2ZzYjRNQi1YRDJqNDUybUlWR1JZNDhGcG13UUZuVmp6RC02SW9DMDR3LWNTNlNIbEhSMUlmMmY4Q3h2Vmp1Mm10S3gxbTRLNlFGUTRlRWs3QkJsTUFiaGVDcFJNWGFDanVYTGZJeXZObg?oc=5"
-        }
+        "AMZN": null,
+        "GOOGL": null
       },
       "outlook": null
     },
     "news": {
-      "domestic": "코스닥 제약·바이오 IR 임원은 ‘생선가게 고양이’ [뉴스톡 웰스톡] / 트럼프 “韓·日 알래스카행” 언급에… 철강株, 장 초반 급등세 - 조선비즈 / KB금융, 美 국채금리 상승에 5%대 강세",
-      "overseas": "뉴욕증시 소폭 상승 반전…유가·국채금리 하락 / 미 국채금리 진정세에 뉴욕증시 4일 만에 반등…다우지수 0.56% 상승 / 뉴욕증시 3대 지수 반등…국채금리 진정에 저가매수 유입"
+      "domestic": "오늘 국내 증시는 중동 불안으로 코스피 상승폭이 축소된 가운데 미국 국채금리 상승 등의 영향으로 보험주와 KB금융 등이 강세를 보였습니다. 또한 트럼프의 발언에 철강주가 장 초반 급등하고 반도체 훈풍 속에서 개별 종목 장세가 심화되었습니다.",
+      "overseas": "미국 국채금리 진정과 유가 상승세 둔화에 힘입어 뉴욕증시가 반등에 성공했습니다. 이로 인해 3거래일 또는 4거래일간의 하락세를 끊고 다우지수가 0.56% 상승했습니다."
     },
     "sources": [
       "네이버페이 증권",
       "Yahoo Finance",
+      "KB Think",
+      "뉴스웍스",
       "뉴스웰",
       "Chosunbiz",
       "네이트",
       "thefairnews.co.kr",
-      "이투데이",
+      "MTN 머니투데이방송",
       "진일보",
-      "콕스뉴스",
       "블록미디어",
-      "supple.kr",
-      "YTN",
-      "글로벌이코노믹",
-      "톱스타뉴스",
-      "v.daum.net",
-      "코인리더스",
-      "vietnam.vn",
-      "Benzinga",
-      "이데일리TV",
-      "조선일보"
+      "edaily.co.kr",
+      "이코노미블록",
+      "매일경제 마켓",
+      "조선일보",
+      "Investing.com 한국어"
     ],
-    "ai_summary": false
+    "ai_summary": true
   }
 }
