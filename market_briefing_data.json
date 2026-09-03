@@ -1,0 +1,471 @@
+{
+  "yesterday": {
+    "updated_at": "2026-09-03 14:55 KST",
+    "kr": {
+      "status": "OPEN",
+      "items": [
+        {
+          "label": "코스피",
+          "pct": 0.26,
+          "value": "6,579.70",
+          "change": "+16.98"
+        },
+        {
+          "label": "코스닥",
+          "pct": -1.48,
+          "value": "792.12",
+          "change": "-11.86"
+        }
+      ],
+      "outlook": null,
+      "reasons": {
+        "코스피": "유가 및 금리 급등과 중동 전운 고조 등의 요인에도 불구하고 +0.26% 상승 마감했습니다.",
+        "코스닥": "외국인 매수세가 유입된 일부 종목의 강세에도 불구하고 -1.48% 약세를 기록했습니다."
+      },
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNbGZxVGFEX2RMQ2tWSFEyMG5ZOEJjbTYxakVHVU5aVUJVaG5ITV8tbWQ2NnVqUjRMaG9pRUtrWUhCOVAwNTNmMUdzR3VnUzktdjQzd1I0RzBkMWRkVVFJUEdNcXFUQzBWWU9UMlplS0tYR0tuVFhrUmhkem5jalpoVTRaUGtTcDYxdENtRDI5bFM?oc=5"
+    },
+    "us": {
+      "items": [
+        {
+          "label": "다우존스",
+          "pct": -0.75,
+          "value": "53,061.95",
+          "change": "-401.93"
+        },
+        {
+          "label": "S&P500",
+          "pct": -0.12,
+          "value": "7,666.60",
+          "change": "-9.10"
+        },
+        {
+          "label": "나스닥",
+          "pct": 0.34,
+          "value": "26,217.83",
+          "change": "+87.63"
+        }
+      ],
+      "outlook": null,
+      "reasons": {
+        "다우존스": "국채금리 진정과 반등 흐름 속에서도 소폭 하락 마감함",
+        "S&P500": "고용 둔화와 중동 정세 등 복합적 요인으로 보합권에서 소폭 하락함",
+        "나스닥": "엔비디아를 앞세워 반등에 성공하며 상승 마감함"
+      },
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1uYVhCQnVaSUQ1cHRzSkpDd3prRnVQUWdQUF9ya3V4OEpNNGVON01wcG1wRWFTMXExR2JUdFdCYzJhQVRuN2pOWlJ4RnlWV3Nlb2VlS0d2T0FtdFJOQ0VjbC1OUWs2eEI5YURjMGl6dVjSAXRBVV95cUxQLWtOeGlMWTEzazRDZ2NlWDhidmFqMXAzWDRlYUMwRkh1VERyM2JHR2tITXhqWktxQnZkbWMyWmI4S3Q4TC15TTZxci1RcGJGYWRRcXM3QnpQVGU1YmtsLW5MZ0tJUmtiNXBlZ1NwdGNRdFZFMg?oc=5"
+    },
+    "stocks": {
+      "items": [
+        {
+          "code": "005930",
+          "label": "삼성전자",
+          "pct": -0.2,
+          "value": "250,000원",
+          "change": "-500"
+        },
+        {
+          "code": "000660",
+          "label": "SK하이닉스",
+          "pct": -0.74,
+          "value": "1,601,000원",
+          "change": "-12,000"
+        },
+        {
+          "code": "373220",
+          "label": "LG에너지솔루션",
+          "pct": 5.47,
+          "value": "366,500원",
+          "change": "+19,000"
+        },
+        {
+          "code": "207940",
+          "label": "삼성바이오로직스",
+          "pct": -2.47,
+          "value": "1,464,000원",
+          "change": "-37,000"
+        },
+        {
+          "code": "005380",
+          "label": "현대차",
+          "pct": 1.32,
+          "value": "383,000원",
+          "change": "+5,000"
+        }
+      ],
+      "news": {
+        "005930": {
+          "reason": "관련 뉴스 헤드라인에 등락 이유에 대한 구체적인 사실이 언급되지 않았습니다.",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOVHNTQjVYRVRzRUt5aF9EQWZzRE9panJBNGtUTWFHX3Ftd1dsblltMmZEeVpXd1BmNEtiZFFTNUZ0b0tJZ3ZQbVNncUtLSHB1Y19rX0JWalRkR0JKSGlRbU5KemstMHBWU0I5NExhVmo1RTJRSG1mSjVncU5tVkJCbDZuSlQ0VXJZUFhyY2JMNkM2SF92NUdB?oc=5"
+        },
+        "000660": {
+          "reason": "미국 3대 주가 지수가 강세를 보였으나 주가는 하락 마감했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
+        },
+        "373220": {
+          "reason": "북미 AMPC를 살릴 히든카드인 ESS에 대한 기대감이 작용했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBlTVYtMWlaRExVUEpYZzdLSjJuOHZyX1NaSzB5VDlDb3pPM0RsTnNVUFVtUkxRclJERWJLYmxiSl9kUFFsMzk2ME91RldYUGpJNVpfUUQwTmxOTk4wUEUwc3Y2Y29yeGx5SWExMkhfQQ?oc=5"
+        },
+        "207940": {
+          "reason": "넉넉한 곳간에도 불구하고 3조 원 규모의 유상증자 추진 소식이 전해졌습니다.",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5OeDRMcEJXclBsQzlqcG8xbUV2MXZBbkg5NzJ4ZVpzeVQ5OG0tbkRfRlFNVW42cnpCbTBGd2Vlb3J1eTNXVm1palZwVFNMMUFYWU90cDR3Tjl2blgyeGJTOWVnSVd2WVFfeXhTM3FwU2EycmNzaTctZWJ3Ulk?oc=5"
+        },
+        "005380": {
+          "reason": "9월 3일 장중 378,500원을 기록하며 소폭 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fWXpVZ1BOY29EcURraVNEaGUzOVJTUzFLUElHSkIyWjFCRUZDZEVXSFpsVU5RbnRCYUtaT1Zsb1lJZEJuVXd5ajZLVVUyUE1RaUh6NXhjUUx1ZjliajlRV3FkSnd3N3Q1VnFUemZBeGEyQQ?oc=5"
+        }
+      },
+      "outlook": null
+    },
+    "us_stocks": {
+      "items": [
+        {
+          "code": "AAPL",
+          "label": "애플",
+          "pct": 3.67,
+          "value": "$324.96",
+          "change": "+11.51"
+        },
+        {
+          "code": "MSFT",
+          "label": "마이크로소프트",
+          "pct": 0.09,
+          "value": "$496.82",
+          "change": "+0.45"
+        },
+        {
+          "code": "NVDA",
+          "label": "엔비디아",
+          "pct": 7.04,
+          "value": "$224.41",
+          "change": "+14.75"
+        },
+        {
+          "code": "AMZN",
+          "label": "아마존",
+          "pct": -2.04,
+          "value": "$254.98",
+          "change": "-5.30"
+        },
+        {
+          "code": "GOOGL",
+          "label": "구글",
+          "pct": -1.43,
+          "value": "$337.12",
+          "change": "-4.88"
+        }
+      ],
+      "news": {
+        "AAPL": {
+          "reason": "신임 CEO 취임 소식과 헤지 비용 언급에 힘입어 5주래 최대 폭으로 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SU0NQWGFBaUhGWGQzQjRtS3dDM3FPVzlyRGV5WUNtVVpCZS15VzhsMFc5V2FFRG1UMGo4c0x6eFgxV0FzWV9LMl9B?oc=5"
+        },
+        "MSFT": {
+          "reason": "에이전트 및 기기 부문으로 조직을 재편한 후 1분기 매출 가이던스를 발표하며 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPdFZYd3EwQ0paaEVwWFRhRWI1NDFBbzVsQnZ4Yi1MOXNzcVNhUDItNTRTRDJpZ29rcUxtWWJiTUc4NF8xT3JOaEgxZ1lHZ0cycE5pSEF1bDM0N09vOUtQelZWTE44aEZ4bE9FNVcxZmNCRGctNEdlQ2wyUW9YS1BXOQ?oc=5"
+        },
+        "NVDA": {
+          "reason": "수요일 증시에서 주목받아야 할 주요 주식 중 하나로 언급되며 급등세를 기록했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxORk1ucDNwU0Z3LVQzMlRBUEpVNy05c3JBcHdIUDYyQy00dEtncGtwRUxWWWpURDhRY2dJT2IydzNOVzhUSHp3V1FuWF9Ec3FGd1hkSkZrTjdCXzhsWGdndmZQemZhRW9wWHpOaVJMRzQyRjBfeWpnaHBFYXNEOUVsVm56dUcwRWktSzdRaUJYcnFsbFQ2Q2JqZkpJX1ZELVJkQ0dMNHhaU1dENi1tVkxNTGoxemJpem14YTJRcVNnR1pLMExLSUVLbVJ6dzJDSXZLamhlVzlsWENiajVQVTVGdTY0c3FJWHRRQWZYYjA1TmN2RHZsRE9hVmFNQ2tQMXZnU1NwMTJCdlZwTXc5ZTFaQUNSUFNpdUpzYTBtbmNUbzc5N1JiWjBoVnhLdExHbW5kUm0tQWJheTNUNnZnbkdLRWpJQ2xKXy1hUmUzWENjWGkyTTR6VThN?oc=5"
+        },
+        "AMZN": {
+          "reason": "주식 받는 직장인이 늘었다는 소식과 함께 전반적인 투자 심리가 위축되며 하락했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE0zY0UxYnZzUWFLRTNlbEVTZFdhbEJWT2NyN3dQVnJ3SDhUZjFyOXZSOEtVTy1lZC1zOFFYOGJjOGpicHlvVGEtVEpjVVlfSjU4TmFQaVF1YnZQT2xFdDkyb2F6SnpDQUxsOXBwdzdFeXRBeG1VLVIwT3k1TQ?oc=5"
+        },
+        "GOOGL": {
+          "reason": "구글의 안방 공습으로 인해 독주하던 AI 방산 공룡이 흔들리며 주가가 하락했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9yT0l5d0xLVFkxN3hncXFaNkZwbWxzck52UGN6S1pzaEpXT2pLVFpDWlNCY0dLbHJ1OXltMlhJM3RweXp5MjRJMjJWaDVQVk0?oc=5"
+        }
+      },
+      "outlook": null
+    },
+    "news": {
+      "domestic": "어제 국내 증시는 유가와 금리가 급등하고 중동 전운이 고조되면서 코스피가 3.99퍼센트 하락 마감했습니다. 이러한 약세 속에서도 엑시콘과 아이에스씨는 각각 삼성전자 장비 수주와 에이아이 실적 모멘텀으로 상승 마감했습니다.",
+      "overseas": "뉴욕증시는 국채금리 상승세 진정과 엔비디아의 호조 등에 힘입어 나흘 만에 반등하며 3대 지수 모두 동반 상승했습니다. 반면 중동발 유가와 금리 급등의 영향으로 코스피는 4퍼센트 급락하며 6500선으로 후퇴했습니다."
+    },
+    "sources": [
+      "네이버페이 증권",
+      "Yahoo Finance",
+      "네이버 프리미엄콘텐츠",
+      "남도일보",
+      "네이트",
+      "산경투데이",
+      "스마트비즈",
+      "thefairnews.co.kr",
+      "매일경제 마켓",
+      "청년일보",
+      "글로벌이코노믹",
+      "뉴스퀘스트",
+      "한국금융신문",
+      "톱스타뉴스",
+      "코인리더스",
+      "edaily.co.kr",
+      "Benzinga",
+      "이데일리TV",
+      "v.daum.net"
+    ],
+    "ai_summary": true
+  },
+  "today": {
+    "updated_at": "2026-09-03 14:56 KST",
+    "kr": {
+      "status": "OPEN",
+      "items": [
+        {
+          "label": "코스피",
+          "pct": 0.24,
+          "value": "6,578.37",
+          "change": "+15.65"
+        },
+        {
+          "label": "코스닥",
+          "pct": -1.49,
+          "value": "791.98",
+          "change": "-12.00"
+        }
+      ],
+      "outlook": {
+        "kospi": {
+          "pct": 0.5,
+          "reason": "미국 증시 반등과 반도체 훈풍에 힘입어 6600선 안착을 시도할 것으로 보입니다."
+        },
+        "kosdaq": {
+          "pct": -0.3,
+          "reason": "기술주 중심의 혼조세 속에서 코스닥은 개별 종목 장세가 이어지며 보합권에서 등락할 전망입니다."
+        }
+      },
+      "reasons": null,
+      "link": null
+    },
+    "us": {
+      "items": [
+        {
+          "label": "다우존스",
+          "pct": -0.75,
+          "value": "53,061.95",
+          "change": "-401.93"
+        },
+        {
+          "label": "S&P500",
+          "pct": -0.12,
+          "value": "7,666.60",
+          "change": "-9.10"
+        },
+        {
+          "label": "나스닥",
+          "pct": 0.34,
+          "value": "26,217.83",
+          "change": "+87.63"
+        }
+      ],
+      "outlook": {
+        "dow": {
+          "pct": 0.2,
+          "reason": "국채금리 상승세 진정과 전통주 매수세 유입으로 다우는 소폭 반등할 것으로 예상됩니다."
+        },
+        "sp500": {
+          "pct": -0.1,
+          "reason": "고유가와 고금리 부담 속에서 대형 기술주가 약세를 보여 S&P500은 약보합세가 전망됩니다."
+        },
+        "nasdaq": {
+          "pct": -0.3,
+          "reason": "알파벳과 마이크로소프트 등 주요 빅테크의 하락 영향으로 나스닥은 약세를 기록할 것입니다."
+        }
+      },
+      "reasons": null,
+      "link": null
+    },
+    "stocks": {
+      "items": [
+        {
+          "code": "005930",
+          "label": "삼성전자",
+          "pct": -0.3,
+          "value": "249,750원",
+          "change": "-750"
+        },
+        {
+          "code": "000660",
+          "label": "SK하이닉스",
+          "pct": -0.87,
+          "value": "1,599,000원",
+          "change": "-14,000"
+        },
+        {
+          "code": "373220",
+          "label": "LG에너지솔루션",
+          "pct": 5.32,
+          "value": "366,000원",
+          "change": "+18,500"
+        },
+        {
+          "code": "207940",
+          "label": "삼성바이오로직스",
+          "pct": -2.53,
+          "value": "1,463,000원",
+          "change": "-38,000"
+        },
+        {
+          "code": "005380",
+          "label": "현대차",
+          "pct": 1.32,
+          "value": "383,000원",
+          "change": "+5,000"
+        }
+      ],
+      "news": {
+        "005930": {
+          "reason": "삼성전자 관련 뉴스가 보도되었으나 -0.30% 하락 마감했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOVHNTQjVYRVRzRUt5aF9EQWZzRE9panJBNGtUTWFHX3Ftd1dsblltMmZEeVpXd1BmNEtiZFFTNUZ0b0tJZ3ZQbVNncUtLSHB1Y19rX0JWalRkR0JKSGlRbU5KemstMHBWU0I5NExhVmo1RTJRSG1mSjVncU5tVkJCbDZuSlQ0VXJZUFhyY2JMNkM2SF92NUdB?oc=5"
+        },
+        "000660": {
+          "reason": "미국 3대 주가 지수 강세 소식에도 불구하고 -0.87% 하락했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
+        },
+        "373220": {
+          "reason": "북미 AMPC 관련 ESS 히든카드 기대감으로 5.32% 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBlTVYtMWlaRExVUEpYZzdLSjJuOHZyX1NaSzB5VDlDb3pPM0RsTnNVUFVtUkxRclJERWJLYmxiSl9kUFFsMzk2ME91RldYUGpJNVpfUUQwTmxOTk4wUEUwc3Y2Y29yeGx5SWExMkhfQQ?oc=5"
+        },
+        "207940": {
+          "reason": "3조 유증 관련 소식이 전해지며 -2.53% 하락 마감했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5OeDRMcEJXclBsQzlqcG8xbUV2MXZBbkg5NzJ4ZVpzeVQ5OG0tbkRfRlFNVW42cnpCbTBGd2Vlb3J1eTNXVm1palZwVFNMMUFYWU90cDR3Tjl2blgyeGJTOWVnSVd2WVFfeXhTM3FwU2EycmNzaTctZWJ3Ulk?oc=5"
+        },
+        "005380": {
+          "reason": "9월 3일 장중 상승세를 보이며 1.32% 올랐습니다.",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fWXpVZ1BOY29EcURraVNEaGUzOVJTUzFLUElHSkIyWjFCRUZDZEVXSFpsVU5RbnRCYUtaT1Zsb1lJZEJuVXd5ajZLVVUyUE1RaUh6NXhjUUx1ZjliajlRV3FkSnd3N3Q1VnFUemZBeGEyQQ?oc=5"
+        }
+      },
+      "outlook": {
+        "005930": {
+          "pct": 0.5,
+          "reason": "전일 하락에 따른 저가 매수세 유입으로 소폭 반등이 예상됩니다."
+        },
+        "000660": {
+          "pct": 1.0,
+          "reason": "미국 증시 강세 분위기와 낙폭 과대 인식으로 반발 매수세가 유입될 것입니다."
+        },
+        "373220": {
+          "pct": 1.5,
+          "reason": "북미 ESS 모멘텀에 대한 기대감이 지속되며 상승세를 이어갈 전망입니다."
+        },
+        "207940": {
+          "pct": -1.0,
+          "reason": "대규모 유상증자 이슈에 따른 투자심리 위축이 단기적으로 지속될 수 있습니다."
+        },
+        "005380": {
+          "pct": 0.4,
+          "reason": "전일 장중 상승 흐름을 이어받아 완만한 우상향 기조를 보일 것입니다."
+        }
+      }
+    },
+    "us_stocks": {
+      "items": [
+        {
+          "code": "AAPL",
+          "label": "애플",
+          "pct": 3.67,
+          "value": "$324.96",
+          "change": "+11.51"
+        },
+        {
+          "code": "MSFT",
+          "label": "마이크로소프트",
+          "pct": 0.09,
+          "value": "$496.82",
+          "change": "+0.45"
+        },
+        {
+          "code": "NVDA",
+          "label": "엔비디아",
+          "pct": 7.04,
+          "value": "$224.41",
+          "change": "+14.75"
+        },
+        {
+          "code": "AMZN",
+          "label": "아마존",
+          "pct": -2.04,
+          "value": "$254.98",
+          "change": "-5.30"
+        },
+        {
+          "code": "GOOGL",
+          "label": "구글",
+          "pct": -1.43,
+          "value": "$337.12",
+          "change": "-4.88"
+        }
+      ],
+      "news": {
+        "AAPL": {
+          "reason": "신임 CEO 취임 소식과 헤지 비용 언급에 힘입어 5주래 최대 폭으로 상승했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SU0NQWGFBaUhGWGQzQjRtS3dDM3FPVzlyRGV5WUNtVVpCZS15VzhsMFc5V2FFRG1UMGo4c0x6eFgxV0FzWV9LMl9B?oc=5"
+        },
+        "MSFT": {
+          "reason": "에이전트 및 기기 부문 재편 후 1분기 매출 가이던스를 발표하며 강보세로 마감했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPdFZYd3EwQ0paaEVwWFRhRWI1NDFBbzVsQnZ4Yi1MOXNzcVNhUDItNTRTRDJpZ29rcUxtWWJiTUc4NF8xT3JOaEgxZ1lHZ0cycE5pSEF1bDM0N09vOUtQelZWTE44aEZ4bE9FNVcxZmNCRGctNEdlQ2wyUW9YS1BXOQ?oc=5"
+        },
+        "NVDA": {
+          "reason": "수요일에 주목받은 주식 중 하나로 부각되며 7% 넘게 급등했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxORk1ucDNwU0Z3LVQzMlRBUEpVNy05c3JBcHdIUDYyQy00dEtncGtwRUxWWWpURDhRY2dJT2IydzNOVzhUSHp3V1FuWF9Ec3FGd1hkSkZrTjdCXzhsWGdndmZQemZhRW9wWHpOaVJMRzQyRjBfeWpnaHBFYXNEOUVsVm56dUcwRWktSzdRaUJYcnFsbFQ2Q2JqZkpJX1ZELVJkQ0dMNHhaU1dENi1tVkxNTGoxemJpem14YTJRcVNnR1pLMExLSUVLbVJ6dzJDSXZLamhlVzlsWENiajVQVTVGdTY0c3FJWHRRQWZYYjA1TmN2RHZsRE9hVmFNQ2tQMXZnU1NwMTJCdlZwTXc5ZTFaQUNSUFNpdUpzYTBtbmNUbzc5N1JiWjBoVnhLdExHbW5kUm0tQWJheTNUNnZnbkdLRWpJQ2xKXy1hUmUzWENjWGkyTTR6VThN?oc=5"
+        },
+        "AMZN": {
+          "reason": "주식 받는 직장인이 늘었다는 소식 속에서 차익실현 매물 등으로 하락세를 보였습니다.",
+          "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE0zY0UxYnZzUWFLRTNlbEVTZFdhbEJWT2NyN3dQVnJ3SDhUZjFyOXZSOEtVTy1lZC1zOFFYOGJjOGpicHlvVGEtVEpjVVlfSjU4TmFQaVF1YnZQT2xFdDkyb2F6SnpDQUxsOXBwdzdFeXRBeG1VLVIwT3k1TQ?oc=5"
+        },
+        "GOOGL": {
+          "reason": "안방 공습을 받으며 독주하던 AI 방산 공룡이 흔들렸다는 보도에 하락했습니다.",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9yT0l5d0xLVFkxN3hncXFaNkZwbWxzck52UGN6S1pzaEpXT2pLVFpDWlNCY0dLbHJ1OXltMlhJM3RweXp5MjRJMjJWaDVQVk0?oc=5"
+        }
+      },
+      "outlook": {
+        "AAPL": {
+          "pct": 1.2,
+          "reason": "신임 CEO 취임 호재와 헤지 비용 언급의 긍정적 모멘텀이 추가 유입될 것으로 보입니다."
+        },
+        "MSFT": {
+          "pct": 0.2,
+          "reason": "사업 재편 및 가이던스 발표 이후 뚜렷한 방향성 없이 완만한 보합세를 유지할 전망입니다."
+        },
+        "NVDA": {
+          "pct": 1.5,
+          "reason": "전일 7% 넘는 급등에 따른 일부 차익실현 매물이 나올 수 있으나 강세는 이어질 것입니다."
+        },
+        "AMZN": {
+          "pct": -0.5,
+          "reason": "전일 차익실현 매물 출회 및 직원 주식 관련 보도의 여진이 약하게 이어질 수 있습니다."
+        },
+        "GOOGL": {
+          "pct": -0.8,
+          "reason": "AI 방산 분야에서의 경쟁 심화 우려와 안방 공습에 대한 경계감이 지속될 것입니다."
+        }
+      }
+    },
+    "news": {
+      "domestic": "오늘 국내 증시는 반도체 훈풍과 미국 국채금리 상승 등의 영향으로 철강주와 KB금융 등이 강세를 보였습니다. 또한 엑시콘은 삼성전자 장비 수주 모멘텀으로 상승 마감하는 등 개별 종목 장세가 심화되었습니다.",
+      "overseas": "미국 국채금리 급등세가 진정되고 매도세가 주춤해진 가운데 뉴욕증시는 나흘 만에 반등에 성공했습니다. 엔비디아와 스노우플레이크 등이 강세를 보이며 지수 상승을 이끌었습니다."
+    },
+    "sources": [
+      "네이버페이 증권",
+      "Yahoo Finance",
+      "Chosunbiz",
+      "thefairnews.co.kr",
+      "네이트",
+      "이투데이",
+      "남도일보",
+      "진일보",
+      "supple.kr",
+      "edaily.co.kr",
+      "지데일리",
+      "이코노미블록",
+      "매일경제 마켓",
+      "글로벌이코노믹",
+      "뉴스퀘스트",
+      "한국금융신문",
+      "톱스타뉴스",
+      "코인리더스",
+      "Benzinga",
+      "이데일리TV",
+      "v.daum.net"
+    ],
+    "ai_summary": true
+  }
+}
