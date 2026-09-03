@@ -1159,9 +1159,10 @@ def stock_group_block(title, items, news_map=None, outlook=None, tag=None,
 
 
 def render_part(label, part_no, time_label, doc):
+    part_key = "yesterday" if part_no == 1 else "today"
     if not doc:
         return f"""
-  <section class="part">
+  <section class="part" data-part="{part_key}">
     <div class="part-head">
       <div><p class="label">Part {part_no} · {time_label} 발행</p><h2>{label}</h2></div>
       <time></time>
@@ -1215,7 +1216,7 @@ def render_part(label, part_no, time_label, doc):
     ai_note = "" if doc.get("ai_summary") else '<p class="ai-note">※ AI 요약 키가 설정되지 않아 헤드라인을 간단히 정리한 버전입니다.</p>'
 
     return f"""
-  <section class="part">
+  <section class="part" data-part="{part_key}">
     <div class="part-head">
       <div><p class="label">Part {part_no} · {time_label} 발행</p><h2>{label}</h2></div>
       <time>{updated}</time>
@@ -1260,9 +1261,19 @@ HTML_SHELL = """<!doctype html>
   .update-schedule {{ list-style:none; margin:8px 0 0; padding:0; font-size:13px; color:var(--muted); font-family:var(--font-mono); }}
   .update-schedule li {{ margin:2px 0; }}
 
+  .mobile-tabs {{ display:none; gap:8px; margin-bottom:16px; }}
+  .tab-btn {{ flex:1; padding:10px 12px; font-family:var(--font-mono); font-size:12px; font-weight:600;
+    letter-spacing:.03em; border:1px solid var(--line); background:var(--paper-raised); color:var(--muted);
+    border-radius:6px; }}
+  .tab-btn.active {{ color:var(--navy-950); border-color:var(--gold); background:var(--gold-soft); }}
+
   .parts-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; margin-bottom:28px; }}
   @media (max-width: 980px) {{
-    .parts-grid {{ grid-template-columns:1fr; }}
+    .parts-grid {{ grid-template-columns:1fr; gap:0; }}
+    .mobile-tabs {{ display:flex; }}
+    /* 좁은 화면에서는 두 파트를 다 세로로 쌓으면 스크롤이 두 배가 되니, 탭으로 하나만 보여준다.
+       기본값(JS 꺼져 있어도)은 '금일 전망'만 보이게 -- JS가 켜지면 인라인 style.display로 전환한다. */
+    .parts-grid > section.part[data-part="yesterday"] {{ display:none; }}
   }}
   /* chart-groups/accuracy-grid의 auto-fit,minmax(420px/280px,1fr)는 그 최소 폭보다 좁은 화면(휴대폰)에서는
      한 칸도 안 들어가서 옆으로 넘쳐버린다 -- 모바일에서는 아예 1열로 강제해서 원래 폭에 맞게 그려지도록 한다. */
@@ -1270,8 +1281,12 @@ HTML_SHELL = """<!doctype html>
     .chart-groups {{ grid-template-columns:1fr; }}
     .accuracy-grid {{ grid-template-columns:1fr; }}
   }}
-  @media (max-width: 480px) {{
-    .wrap {{ padding:32px 16px 56px; }}
+  @media (max-width: 640px) {{
+    .wrap {{ padding:28px 14px 48px; }}
+    .part-body {{ padding:16px 16px 18px; }}
+    .chart-group {{ padding:12px 14px 14px; }}
+    .chart-groups {{ gap:14px; margin-bottom:10px; }}
+    .accuracy-card {{ padding:12px 14px 14px; }}
   }}
 
   section.part {{ background:var(--paper-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; }}
@@ -1336,6 +1351,10 @@ HTML_SHELL = """<!doctype html>
       <li>· 22:00 해외 지수·종목 오늘 전망</li>
     </ul>
   </header>
+  <div class="mobile-tabs">
+    <button type="button" class="tab-btn" data-tab="yesterday">전일 마감 요약</button>
+    <button type="button" class="tab-btn" data-tab="today">금일 전망 · 주목 이슈</button>
+  </div>
   <div class="parts-grid">
 {part_yesterday}
 {part_today}
@@ -1379,6 +1398,32 @@ HTML_SHELL = """<!doctype html>
     align();
     window.addEventListener('resize', align);
   }}
+}})();
+(function() {{
+  // 좁은 화면에서는 전일 마감/금일 전망을 둘 다 세로로 쌓으면 스크롤이 두 배가 되니, 탭으로 하나만
+  // 보여준다. CSS는 JS 없이도 '금일 전망'이 기본으로 보이게 해뒀고, 여기서는 그 위에 클릭 전환만 얹는다.
+  var tabs = document.querySelectorAll('.tab-btn');
+  var parts = document.querySelectorAll('.parts-grid > section.part[data-part]');
+  if (!tabs.length || !parts.length) return;
+  var mq = window.matchMedia('(max-width: 980px)');
+
+  function activate(name) {{
+    tabs.forEach(function(b) {{ b.classList.toggle('active', b.dataset.tab === name); }});
+    parts.forEach(function(p) {{ p.style.display = (p.dataset.part === name) ? 'block' : 'none'; }});
+  }}
+  function sync() {{
+    if (mq.matches) {{
+      activate('today');
+    }} else {{
+      parts.forEach(function(p) {{ p.style.display = ''; }});
+      tabs.forEach(function(b) {{ b.classList.remove('active'); }});
+    }}
+  }}
+  tabs.forEach(function(b) {{
+    b.addEventListener('click', function() {{ activate(b.dataset.tab); }});
+  }});
+  sync();
+  if (mq.addEventListener) {{ mq.addEventListener('change', sync); }} else {{ mq.addListener(sync); }}
 }})();
 </script>
 </body>
