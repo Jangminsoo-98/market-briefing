@@ -1,0 +1,47 @@
+name: Market Briefing
+
+on:
+  schedule:
+    # cron is UTC. KST = UTC+9, so these map to 06:00 / 08:30 / 22:00 KST on weekdays.
+    - cron: '0 21 * * 0-4'   # 06:00 KST Mon-Fri -> mode=yesterday
+    - cron: '30 23 * * 0-4'  # 08:30 KST Mon-Fri -> mode=today
+    - cron: '0 13 * * 1-5'   # 22:00 KST Mon-Fri -> mode=usopen
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'mode to run (yesterday/today/usopen)'
+        required: false
+        default: 'today'
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Determine mode
+        id: mode
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 21 * * 0-4") echo "mode=yesterday" >> "$GITHUB_OUTPUT" ;;
+            "30 23 * * 0-4") echo "mode=today" >> "$GITHUB_OUTPUT" ;;
+            "0 13 * * 1-5") echo "mode=usopen" >> "$GITHUB_OUTPUT" ;;
+            *) echo "mode=${{ github.event.inputs.mode || 'today' }}" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run briefing
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/market_briefing.py ${{ steps.mode.outputs.mode }} --no-open
