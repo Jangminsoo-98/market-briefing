@@ -205,7 +205,7 @@
     "ai_summary": true
   },
   "today": {
-    "updated_at": "2026-09-03 16:26 KST",
+    "updated_at": "2026-09-03 16:34 KST",
     "kr": {
       "status": "CLOSE",
       "items": [
@@ -291,8 +291,8 @@
       ],
       "news": {
         "005930": {
-          "reason": "삼성전자",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOVHNTQjVYRVRzRUt5aF9EQWZzRE9panJBNGtUTWFHX3Ftd1dsblltMmZEeVpXd1BmNEtiZFFTNUZ0b0tJZ3ZQbVNncUtLSHB1Y19rX0JWalRkR0JKSGlRbU5KemstMHBWU0I5NExhVmo1RTJRSG1mSjVncU5tVkJCbDZuSlQ0VXJZUFhyY2JMNkM2SF92NUdB?oc=5"
+          "reason": "[특징주] 삼성전자·SK하이닉스, 美 3대 주가 지수 강세.. '상승'",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
         },
         "000660": {
           "reason": "[특징주] 삼성전자·SK하이닉스, 美 3대 주가 지수 강세.. '상승'",
@@ -303,8 +303,8 @@
           "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBlTVYtMWlaRExVUEpYZzdLSjJuOHZyX1NaSzB5VDlDb3pPM0RsTnNVUFVtUkxRclJERWJLYmxiSl9kUFFsMzk2ME91RldYUGpJNVpfUUQwTmxOTk4wUEUwc3Y2Y29yeGx5SWExMkhfQQ?oc=5"
         },
         "207940": {
-          "reason": "삼성바이오로직스 주가 24,000원 하락 후 장마감",
-          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB2aktNY0dGYTJoREhxQlp4dDNKRWRfczg2aW15WVlFMXVfMmJpN21iWUJtT2NvdG5LNDRYWldsYjJoejFxYmY1bG5ZcEhkMU44NmtWd0pEdUtzOVBa?oc=5"
+          "reason": "'3조 유증' 삼성바이오로직스, 주주 달래기…\"15조 투자 위한 전략적 선택\"",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE43WlBSRTFZeUpGZVBKLUQ0Vm1BT1NvVUY0eC01TWZMZ1JxRUNoZUN2NHQzQzNvRXV1RTA4STNzY3MyOHhUbzBjSlAzR3ZjZTg?oc=5"
         },
         "005380": {
           "reason": "현대차 주가, 9월 3일 장중 378,500원 0.13% 상승",
@@ -376,31 +376,30 @@
       "outlook": null
     },
     "news": {
-      "domestic": "코스닥 제약·바이오 IR 임원은 ‘생선가게 고양이’ [뉴스톡 웰스톡] / 트럼프 “韓·日 알래스카행” 언급에… 철강株, 장 초반 급등세 - 조선비즈 / \"반도체 훈풍에 6600선 안착\"…증시 상방 압력 속 개별 종목 장세 심화",
+      "domestic": "코스닥 제약·바이오 IR 임원은 ‘생선가게 고양이’ [뉴스톡 웰스톡] / 트럼프 “韓·日 알래스카행” 언급에… 철강株, 장 초반 급등세 - 조선비즈 / KB금융, 美 국채금리 상승에 5%대 강세",
       "overseas": "뉴욕증시 소폭 상승 반전…유가·국채금리 하락 / 미 국채금리 진정세에 뉴욕증시 4일 만에 반등…다우지수 0.56% 상승 / 뉴욕증시 3대 지수 반등…국채금리 진정에 저가매수 유입"
     },
     "sources": [
       "네이버페이 증권",
       "Yahoo Finance",
-      "newswell.co.kr",
+      "뉴스웰",
       "Chosunbiz",
+      "네이트",
       "thefairnews.co.kr",
-      "news.nate.com",
       "이투데이",
-      "진일보",
+      "jnilbo.com",
       "콕스뉴스",
-      "블록미디어",
+      "blockmedia.co.kr",
       "supple.kr",
       "edaily.co.kr",
-      "매일경제 마켓",
       "글로벌이코노믹",
       "뉴스퀘스트",
-      "아시아뉴스통신",
+      "v.daum.net",
       "톱스타뉴스",
-      "coinreaders.com",
+      "코인리더스",
       "Vietnam.vn",
       "연합인포맥스",
-      "이데일리TV",
+      "tv.edaily.co.kr",
       "조선일보"
     ],
     "ai_summary": false
