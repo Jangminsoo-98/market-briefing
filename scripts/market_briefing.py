@@ -1264,6 +1264,15 @@ HTML_SHELL = """<!doctype html>
   @media (max-width: 980px) {{
     .parts-grid {{ grid-template-columns:1fr; }}
   }}
+  /* chart-groups/accuracy-grid의 auto-fit,minmax(420px/280px,1fr)는 그 최소 폭보다 좁은 화면(휴대폰)에서는
+     한 칸도 안 들어가서 옆으로 넘쳐버린다 -- 모바일에서는 아예 1열로 강제해서 원래 폭에 맞게 그려지도록 한다. */
+  @media (max-width: 900px) {{
+    .chart-groups {{ grid-template-columns:1fr; }}
+    .accuracy-grid {{ grid-template-columns:1fr; }}
+  }}
+  @media (max-width: 480px) {{
+    .wrap {{ padding:32px 16px 56px; }}
+  }}
 
   section.part {{ background:var(--paper-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; }}
   .part-head {{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:20px 24px;
