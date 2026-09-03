@@ -685,34 +685,139 @@ def save_json(path, obj):
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
 
-def update_history(kr_raw, outlook=None):
-    """실제 종가는 그 값이 실제로 속한 거래일(kr_raw['trade_date'], Naver의 localTradedAt에서
-    뽑음)에 저장한다 -- 스크립트가 도는 시각(예: 개장 전 06:00, 08:50)의 달력 날짜를 그대로 쓰면
-    장 열리기 전에는 항상 '어제 종가'가 잡히기 때문에, 그걸 '오늘' 날짜에 저장하면 예측/실제 비교가
-    하루씩 밀린다. outlook(오늘 아침 AI가 예측한 오늘자 등락률)은 반대로 '예측이 가리키는 날짜',
-    즉 지금 이 순간의 달력 날짜에 저장해야 한다 -- 아직 그 날의 실제 종가가 안 잡혀 있어도 나중에
-    같은 날짜 키로 실제값이 채워지면 자연스럽게 합쳐진다."""
-    if not kr_raw.get("kospi") or not kr_raw.get("kosdaq"):
+US_INDEX_IDS = {"다우존스": "dow", "S&P500": "sp500", "나스닥": "nasdaq"}
+
+ACCURACY_LABELS = {
+    "kospi": "코스피", "kosdaq": "코스닥",
+    "dow": "다우존스", "sp500": "S&P500", "nasdaq": "나스닥",
+    "005930": "삼성전자", "000660": "SK하이닉스", "373220": "LG에너지솔루션",
+    "207940": "삼성바이오로직스", "005380": "현대차",
+    "AAPL": "애플", "MSFT": "마이크로소프트", "NVDA": "엔비디아", "AMZN": "아마존", "GOOGL": "구글",
+}
+ACCURACY_GROUPS = [
+    ("국내 지수", ["kospi", "kosdaq"]),
+    ("해외 지수", ["dow", "sp500", "nasdaq"]),
+    ("국내 핵심종목", ["005930", "000660", "373220", "207940", "005380"]),
+    ("해외 핵심종목", ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL"]),
+]
+
+
+def _merge_history_item(history, date, item_id, actual=None, pred_pct=None):
+    if actual is None and pred_pct is None:
         return
+    entry = history.setdefault(date, {}).setdefault("items", {}).setdefault(item_id, {})
+    if actual is not None:
+        entry["actual"] = actual
+    if pred_pct is not None:
+        entry["pred_pct"] = pred_pct
+    # 코스피/코스닥은 기존 하단 추세선(svg_trend_chart)이 top-level 필드를 읽으므로 같이 채워둔다.
+    if item_id in ("kospi", "kosdaq"):
+        if actual is not None:
+            history.setdefault(date, {})[item_id] = actual
+        if pred_pct is not None:
+            history.setdefault(date, {})[f"{item_id}_pred_pct"] = pred_pct
+
+
+def _record_us_accuracy(history, date, us_items, us_outlook, us_stock_items, us_stock_outlook):
+    """해외 지수/핵심종목의 실제값·예측을 기록한다. Yahoo 응답에서 정확한 거래일을 못 뽑아서
+    지금(호출 시점) 날짜로 근사한다 -- 국내 지수처럼 하루씩 안 밀리게 하려면 나중에 Yahoo 응답의
+    타임스탬프를 파싱해 개선할 수 있지만, 평일마다 한 번씩만 기록되므로 근사치로도 충분하다."""
+    us_outlook = us_outlook or {}
+    for it in us_items:
+        item_id = US_INDEX_IDS.get(it["label"])
+        if item_id:
+            _merge_history_item(history, date, item_id, actual=parse_amount(it.get("value")),
+                                 pred_pct=(us_outlook.get(item_id) or {}).get("pct"))
+    us_stock_outlook = us_stock_outlook or {}
+    for it in us_stock_items:
+        item_id = it.get("code")
+        if item_id:
+            _merge_history_item(history, date, item_id, actual=parse_amount(it.get("value")),
+                                 pred_pct=(us_stock_outlook.get(item_id) or {}).get("pct"))
+
+
+def update_history(doc, kr_raw):
+    """모든 지수·종목의 실제값과 그날 아침 AI 예측을 히스토리에 기록한다 (하단 추세/정확도
+    차트용). 국내 지수는 실제 거래일(kr_raw['trade_date'], Naver의 localTradedAt에서 뽑음)을
+    알 수 있어 그 날짜에 실제값을 저장한다 -- 스크립트가 도는 시각(예: 개장 전 06:00, 08:30)의
+    달력 날짜를 그대로 쓰면 장 열리기 전에는 항상 '어제 종가'가 잡히기 때문에, 그걸 '오늘' 날짜에
+    저장하면 예측/실제 비교가 하루씩 밀린다. 예측은 반대로 '예측이 가리키는 날짜' = 지금 이 순간의
+    달력 날짜에 저장한다. 해외 지수/국내외 핵심종목은 거래일을 정확히 못 뽑아서 지금 날짜로 근사한다."""
     history = load_json(HISTORY_PATH)
+    today_date = datetime.now(KST).strftime("%Y-%m-%d")
 
-    trade_date = kr_raw.get("trade_date") or datetime.now(KST).strftime("%Y-%m-%d")
-    actual_entry = history.get(trade_date, {})
-    actual_entry["kospi"] = kr_raw["kospi"]
-    actual_entry["kosdaq"] = kr_raw["kosdaq"]
-    history[trade_date] = actual_entry
+    if kr_raw.get("kospi") and kr_raw.get("kosdaq"):
+        kr_trade_date = kr_raw.get("trade_date") or today_date
+        kr_outlook = doc.get("kr", {}).get("outlook") or {}
+        _merge_history_item(history, kr_trade_date, "kospi", actual=kr_raw["kospi"])
+        _merge_history_item(history, kr_trade_date, "kosdaq", actual=kr_raw["kosdaq"])
+        _merge_history_item(history, today_date, "kospi", pred_pct=(kr_outlook.get("kospi") or {}).get("pct"))
+        _merge_history_item(history, today_date, "kosdaq", pred_pct=(kr_outlook.get("kosdaq") or {}).get("pct"))
 
-    if outlook:
-        predict_date = datetime.now(KST).strftime("%Y-%m-%d")
-        pred_entry = history.get(predict_date, {})
-        kospi_pct = (outlook.get("kospi") or {}).get("pct")
-        kosdaq_pct = (outlook.get("kosdaq") or {}).get("pct")
-        if kospi_pct is not None:
-            pred_entry["kospi_pred_pct"] = kospi_pct
-        if kosdaq_pct is not None:
-            pred_entry["kosdaq_pred_pct"] = kosdaq_pct
-        history[predict_date] = pred_entry
+    stock_outlook = doc.get("stocks", {}).get("outlook") or {}
+    for it in doc.get("stocks", {}).get("items", []):
+        item_id = it.get("code")
+        if item_id:
+            _merge_history_item(history, today_date, item_id, actual=parse_amount(it.get("value")),
+                                 pred_pct=(stock_outlook.get(item_id) or {}).get("pct"))
+
+    _record_us_accuracy(history, today_date, doc.get("us", {}).get("items", []), doc.get("us", {}).get("outlook"),
+                         doc.get("us_stocks", {}).get("items", []), doc.get("us_stocks", {}).get("outlook"))
     save_json(HISTORY_PATH, history)
+
+
+def compute_accuracy_table(history):
+    """항목별로 예측 등락률(pred_pct)이 실제로 얼마나 맞았는지 -- 방향 적중률 + 평균 오차(%p) --
+    연속된 두 기록일 사이의 실제 등락률과 비교해서 계산한다."""
+    dates = sorted(history.keys())
+    pairs_by_item = {}
+    for i in range(1, len(dates)):
+        prev_items = history[dates[i - 1]].get("items", {})
+        cur_items = history[dates[i]].get("items", {})
+        for item_id, cur in cur_items.items():
+            pred_pct = cur.get("pred_pct")
+            actual_now = cur.get("actual")
+            actual_prev = (prev_items.get(item_id) or {}).get("actual")
+            if pred_pct is None or actual_now is None or not actual_prev:
+                continue
+            actual_pct = (actual_now - actual_prev) / actual_prev * 100
+            pairs_by_item.setdefault(item_id, []).append((pred_pct, actual_pct))
+
+    result = {}
+    for item_id, pairs in pairs_by_item.items():
+        n = len(pairs)
+        hits = sum(1 for p, a in pairs if (p > 0) == (a > 0) or (abs(p) < 0.05 and abs(a) < 0.05))
+        avg_err = sum(abs(p - a) for p, a in pairs) / n
+        result[item_id] = {"n": n, "hit_rate": hits / n * 100, "avg_err": avg_err}
+    return result
+
+
+def accuracy_table_html(history):
+    stats = compute_accuracy_table(history)
+    if not stats:
+        return '<p class="chart-empty">최근 며칠간의 데이터가 쌓이면 지수·종목별 AI 예측 정확도가 여기 표시됩니다 (평일마다 자동 누적).</p>'
+    body_rows = []
+    for group_label, ids in ACCURACY_GROUPS:
+        body_rows.append(f'<tr class="accuracy-group"><td colspan="4">{esc(group_label)}</td></tr>')
+        for item_id in ids:
+            label = ACCURACY_LABELS.get(item_id, item_id)
+            s = stats.get(item_id)
+            if not s:
+                body_rows.append(
+                    f'<tr><td>{esc(label)}</td><td colspan="3" class="chart-muted">데이터 쌓는 중</td></tr>'
+                )
+                continue
+            body_rows.append(
+                f'<tr><td>{esc(label)}</td>'
+                f'<td class="num">{s["hit_rate"]:.0f}%</td>'
+                f'<td class="num">±{s["avg_err"]:.2f}%p</td>'
+                f'<td class="num">{s["n"]}일</td></tr>'
+            )
+    return (
+        '<table class="accuracy-table">'
+        '<thead><tr><th>항목</th><th>방향 적중률</th><th>평균 오차</th><th>표본</th></tr></thead>'
+        f'<tbody>{"".join(body_rows)}</tbody></table>'
+    )
 
 
 # ---------------------------------------------------------------- html ----
@@ -1302,6 +1407,12 @@ HTML_SHELL = """<!doctype html>
   .trend-line.series2 {{ stroke:var(--series-2); }}
 
   .ai-note {{ margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }}
+  .accuracy-heading {{ font-family:var(--font-display); font-size:16px; font-weight:600; margin:20px 0 6px; padding-top:16px; border-top:1px solid var(--line); }}
+  .accuracy-table {{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }}
+  .accuracy-table th {{ text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }}
+  .accuracy-table td {{ padding:6px 8px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
+  .accuracy-table td.num, .accuracy-table th.num {{ text-align:right; }}
+  .accuracy-table tr.accuracy-group td {{ font-family:var(--font-body); font-weight:700; font-size:12px; color:var(--gold); background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%); padding-top:10px; }}
   .sources {{ margin:14px 0 0; padding-top:10px; border-top:1px dashed var(--line); font-size:11.5px; color:var(--muted); font-family:var(--font-mono); }}
   .empty {{ color:var(--muted); font-size:14px; }}
   footer.page {{ margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); font-family:var(--font-mono); }}
@@ -1331,6 +1442,9 @@ HTML_SHELL = """<!doctype html>
     <div class="part-body">
       <p class="ai-note">매일 아침 AI가 예측한 등락률(점선 원)을 그날 실제 마감값(실선)과 겹쳐 보여줍니다 -- 원이 실선에 가까울수록 예측이 정확했다는 뜻입니다.</p>
       {trend_chart}
+      <h3 class="accuracy-heading">지수·종목별 AI 예측 정확도</h3>
+      <p class="ai-note">방향 적중률 = 예측한 상승/하락 방향이 실제와 맞은 비율. 평균 오차 = 예측 등락률과 실제 등락률 차이의 평균(%p).</p>
+      {accuracy_table}
     </div>
   </section>
   <footer class="page">
@@ -1374,8 +1488,10 @@ def render_html(data, history):
     part1 = render_part("전일 마감 요약", 1, "06:00", data.get("yesterday"))
     part2 = render_part("금일 전망 · 주목 이슈", 2, "08:00", data.get("today"))
     trend = svg_trend_chart(history)
+    accuracy_table = accuracy_table_html(history)
     html = HTML_SHELL.format(
-        generated_at=generated_at, part_yesterday=part1, part_today=part2, trend_chart=trend
+        generated_at=generated_at, part_yesterday=part1, part_today=part2, trend_chart=trend,
+        accuracy_table=accuracy_table,
     )
     with open(HTML_PATH, "w", encoding="utf-8") as f:
         f.write(html)
@@ -1453,6 +1569,9 @@ def main():
             save_json(DATA_PATH, data)
 
         history = load_json(HISTORY_PATH)
+        today_date = datetime.now(KST).strftime("%Y-%m-%d")
+        _record_us_accuracy(history, today_date, us_items, us_outlook, us_stock_items, us_stock_outlook)
+        save_json(HISTORY_PATH, history)
         render_html(data, history)
         publish_site(f"US pre-open update {datetime.now(KST).strftime('%Y-%m-%d %H:%M KST')}")
         status = "AI 예측 생성" if us_outlook else "실시간 데이터만 갱신 (AI 키 없음/실패)"
@@ -1464,7 +1583,7 @@ def main():
     data = load_json(DATA_PATH)
     data[mode] = doc
     save_json(DATA_PATH, data)
-    update_history(kr_raw, outlook=doc["kr"].get("outlook"))
+    update_history(doc, kr_raw)
     history = load_json(HISTORY_PATH)
     render_html(data, history)
     publish_site(f"Update briefing ({mode}) {datetime.now(KST).strftime('%Y-%m-%d %H:%M KST')}")
