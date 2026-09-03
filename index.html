@@ -22,7 +22,7 @@
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--navy-950); font-family:var(--font-body); line-height:1.6; }
-  .wrap { max-width:1440px; margin:0 auto; padding:48px 32px 80px; }
+  .wrap { max-width:1680px; margin:0 auto; padding:48px 32px 80px; }
   header.page { border-bottom:2px solid var(--navy-950); padding-bottom:20px; margin-bottom:32px; }
   .eyebrow { font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; margin:0 0 10px; }
   h1.title { font-family:var(--font-display); font-weight:700; font-size:clamp(26px,5vw,36px); margin:0 0 8px; }
@@ -43,7 +43,7 @@
   .part-head time { font-family:var(--font-mono); font-size:12px; color:var(--muted); white-space:nowrap; }
   .part-body { padding:22px 24px 26px; }
 
-  .chart-groups { display:flex; flex-direction:column; gap:18px; margin-bottom:14px; }
+  .chart-groups { display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:18px; margin-bottom:14px; }
   .chart-group { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:16px 18px 16px; }
   .chart-group-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
   .chart-group-head h3 { margin:0; font-size:15px; font-weight:700; display:flex; align-items:center; gap:8px; }
@@ -72,11 +72,14 @@
   .stock-news strong { color:var(--navy-950); font-weight:700; }
 
   .ai-note { margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }
-  .accuracy-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
-  .accuracy-table th { text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }
-  .accuracy-table td { padding:6px 8px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+  .accuracy-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:8px; }
+  .accuracy-card { background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:14px 16px 16px; }
+  .accuracy-card h4 { margin:0 0 8px; font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--navy-950); }
+  .accuracy-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .accuracy-table th { text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 4px; border-bottom:1px solid var(--line); }
+  .accuracy-table td { padding:6px 4px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+  .accuracy-table tr:last-child td { border-bottom:none; }
   .accuracy-table td.num, .accuracy-table th.num { text-align:right; }
-  .accuracy-table tr.accuracy-group td { font-family:var(--font-body); font-weight:700; font-size:12px; color:var(--gold); background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%); padding-top:10px; }
   .sources { margin:14px 0 0; padding-top:10px; border-top:1px dashed var(--line); font-size:11.5px; color:var(--muted); font-family:var(--font-mono); }
   .empty { color:var(--muted); font-size:14px; }
   footer.page { margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); font-family:var(--font-mono); }
@@ -87,7 +90,7 @@
   <header class="page">
     <p class="eyebrow">KOSPI · KOSDAQ · US MARKETS (CLOUD / FREE)</p>
     <h1 class="title">데일리 마켓 브리핑(클라우드)</h1>
-    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 (마지막 갱신: 2026-09-03 22:34)</p>
+    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 (마지막 갱신: 2026-09-03 22:54)</p>
     <ul class="update-schedule">
       <li>· 06:00 전일 마감 요약 (최근 AI 예측·실제 정확도)</li>
       <li>· 08:30 국내 지수·종목 오늘 전망</li>

@@ -787,31 +787,35 @@ def compute_accuracy_table(history):
 
 
 def accuracy_table_html(history):
+    """4개 그룹(국내 지수/해외 지수/국내·해외 핵심종목)을 각각 별도 카드로 나눠 2x2로 배치한다 --
+    표 하나에 다 몰아넣으면 세로로 너무 길어지고, 그룹 구분도 헤더 행 하나로만 표시돼 잘 안 보였다."""
     stats = compute_accuracy_table(history)
     if not stats:
         return '<p class="chart-empty">최근 며칠간의 데이터가 쌓이면 지수·종목별 AI 예측 정확도가 여기 표시됩니다 (평일마다 자동 누적).</p>'
-    body_rows = []
-    for group_label, ids in ACCURACY_GROUPS:
-        body_rows.append(f'<tr class="accuracy-group"><td colspan="4">{esc(group_label)}</td></tr>')
+
+    def group_card(group_label, ids):
+        rows = []
         for item_id in ids:
             label = ACCURACY_LABELS.get(item_id, item_id)
             s = stats.get(item_id)
             if not s:
-                body_rows.append(
-                    f'<tr><td>{esc(label)}</td><td colspan="3" class="chart-muted">데이터 쌓는 중</td></tr>'
-                )
+                rows.append(f'<tr><td>{esc(label)}</td><td colspan="3" class="chart-muted">데이터 쌓는 중</td></tr>')
                 continue
-            body_rows.append(
+            rows.append(
                 f'<tr><td>{esc(label)}</td>'
                 f'<td class="num">{s["hit_rate"]:.0f}%</td>'
                 f'<td class="num">±{s["avg_err"]:.2f}%p</td>'
                 f'<td class="num">{s["n"]}일</td></tr>'
             )
-    return (
-        '<table class="accuracy-table">'
-        '<thead><tr><th>항목</th><th>방향 적중률</th><th>평균 오차</th><th>표본</th></tr></thead>'
-        f'<tbody>{"".join(body_rows)}</tbody></table>'
-    )
+        return (
+            f'<div class="accuracy-card"><h4>{esc(group_label)}</h4>'
+            '<table class="accuracy-table">'
+            '<thead><tr><th>항목</th><th class="num">적중률</th><th class="num">오차</th><th class="num">표본</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table></div>'
+        )
+
+    cards = "".join(group_card(label, ids) for label, ids in ACCURACY_GROUPS)
+    return f'<div class="accuracy-grid">{cards}</div>'
 
 
 # ---------------------------------------------------------------- html ----
@@ -1248,7 +1252,7 @@ HTML_SHELL = """<!doctype html>
   }}
   * {{ box-sizing:border-box; }}
   body {{ margin:0; background:var(--paper); color:var(--navy-950); font-family:var(--font-body); line-height:1.6; }}
-  .wrap {{ max-width:1440px; margin:0 auto; padding:48px 32px 80px; }}
+  .wrap {{ max-width:1680px; margin:0 auto; padding:48px 32px 80px; }}
   header.page {{ border-bottom:2px solid var(--navy-950); padding-bottom:20px; margin-bottom:32px; }}
   .eyebrow {{ font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; margin:0 0 10px; }}
   h1.title {{ font-family:var(--font-display); font-weight:700; font-size:clamp(26px,5vw,36px); margin:0 0 8px; }}
@@ -1269,7 +1273,7 @@ HTML_SHELL = """<!doctype html>
   .part-head time {{ font-family:var(--font-mono); font-size:12px; color:var(--muted); white-space:nowrap; }}
   .part-body {{ padding:22px 24px 26px; }}
 
-  .chart-groups {{ display:flex; flex-direction:column; gap:18px; margin-bottom:14px; }}
+  .chart-groups {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:18px; margin-bottom:14px; }}
   .chart-group {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:16px 18px 16px; }}
   .chart-group-head {{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }}
   .chart-group-head h3 {{ margin:0; font-size:15px; font-weight:700; display:flex; align-items:center; gap:8px; }}
@@ -1298,11 +1302,14 @@ HTML_SHELL = """<!doctype html>
   .stock-news strong {{ color:var(--navy-950); font-weight:700; }}
 
   .ai-note {{ margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }}
-  .accuracy-table {{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }}
-  .accuracy-table th {{ text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }}
-  .accuracy-table td {{ padding:6px 8px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
+  .accuracy-grid {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:8px; }}
+  .accuracy-card {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:14px 16px 16px; }}
+  .accuracy-card h4 {{ margin:0 0 8px; font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--navy-950); }}
+  .accuracy-table {{ width:100%; border-collapse:collapse; font-size:13px; }}
+  .accuracy-table th {{ text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 4px; border-bottom:1px solid var(--line); }}
+  .accuracy-table td {{ padding:6px 4px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-variant-numeric:tabular-nums; }}
+  .accuracy-table tr:last-child td {{ border-bottom:none; }}
   .accuracy-table td.num, .accuracy-table th.num {{ text-align:right; }}
-  .accuracy-table tr.accuracy-group td {{ font-family:var(--font-body); font-weight:700; font-size:12px; color:var(--gold); background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%); padding-top:10px; }}
   .sources {{ margin:14px 0 0; padding-top:10px; border-top:1px dashed var(--line); font-size:11.5px; color:var(--muted); font-family:var(--font-mono); }}
   .empty {{ color:var(--muted); font-size:14px; }}
   footer.page {{ margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); font-family:var(--font-mono); }}
