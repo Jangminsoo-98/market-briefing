@@ -102,10 +102,11 @@ def fetch_json(url, data=None, headers=None):
         with urllib.request.urlopen(req, timeout=20) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
-        # 기본 str(e)는 "HTTP Error 400: Bad Request"처럼 상태줄만 나와서 원인 파악이 안 된다 --
-        # 실제 원인(예: API 키 무효, IP 제한 등)은 보통 응답 본문 JSON에 있으므로 그걸 붙여서 다시 던진다.
+        # 기본 str(e)는 "HTTP Error 400: Bad Request"처럼 상태줄만 나와서 원인 파악이 안 된다 -- 실제
+        # 원인(예: API 키 무효, IP 제한 등)은 보통 응답 본문 JSON에 있다. HTTPError를 그대로 재구성해서
+        # 던지면 __str__이 내부적으로 msg만 쓰고 본문을 무시하는 경우가 있어 RuntimeError로 감싼다.
         body = e.read().decode("utf-8", "replace")[:500]
-        raise urllib.error.HTTPError(e.url, e.code, f"{e.reason} - {body}", e.headers, None) from None
+        raise RuntimeError(f"HTTP {e.code} {e.reason} -- {body}") from None
 
 
 def fetch_bytes(url):
