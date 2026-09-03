@@ -1,11 +1,6 @@
 name: Market Briefing
 
 on:
-  schedule:
-    # cron is UTC. KST = UTC+9, so these map to 06:00 / 08:30 / 22:00 KST on weekdays.
-    - cron: '0 21 * * 0-4'   # 06:00 KST Mon-Fri -> mode=yesterday
-    - cron: '30 23 * * 0-4'  # 08:30 KST Mon-Fri -> mode=today
-    - cron: '0 13 * * 1-5'   # 22:00 KST Mon-Fri -> mode=usopen
   workflow_dispatch:
     inputs:
       mode:
