@@ -98,8 +98,14 @@ US_STOCK_LIST = [
 
 def fetch_json(url, data=None, headers=None):
     req = urllib.request.Request(url, data=data, headers=headers or UA, method="POST" if data else "GET")
-    with urllib.request.urlopen(req, timeout=20) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        # 기본 str(e)는 "HTTP Error 400: Bad Request"처럼 상태줄만 나와서 원인 파악이 안 된다 --
+        # 실제 원인(예: API 키 무효, IP 제한 등)은 보통 응답 본문 JSON에 있으므로 그걸 붙여서 다시 던진다.
+        body = e.read().decode("utf-8", "replace")[:500]
+        raise urllib.error.HTTPError(e.url, e.code, f"{e.reason} - {body}", e.headers, None) from None
 
 
 def fetch_bytes(url):
