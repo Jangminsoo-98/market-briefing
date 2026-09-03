@@ -952,25 +952,20 @@ def predicted_bar_block(outlook, keys, base_items=None, links=None):
 
 
 def numeric_highlight_list(items, reasons=None, link=None):
-    """지수 그룹(해외 지수, 전일 마감 국내 지수)에 붙일 한 줄 요약 목록. reasons(지수별 '왜' 이유,
-    explain_index_moves 결과)가 있으면 숫자 뒤에 이어붙이고, link(관련 기사)가 있으면 끝에 붙인다."""
+    """지수 그룹(해외 지수, 전일 마감 국내 지수)에 붙일 한 줄 핵심 요약 목록. 숫자는 차트에 이미
+    다 나와 있으니 여기서는 반복하지 않고 '왜'(explain_index_moves 결과)만 보여준다 -- AI 키가
+    없어서 이유가 없을 때만 등락률로 폴백한다. link(관련 기사)가 있으면 끝에 붙인다."""
     reasons = reasons or {}
     rows = []
     for it in items:
         pct = it.get("pct")
-        curr_val = parse_amount(it.get("value"))
-        change_val = parse_amount(it.get("change"))
-        if pct is None or curr_val is None or change_val is None:
+        if pct is None:
             continue
-        prev_val = curr_val - change_val
-        word = "상승" if pct > 0 else ("하락" if pct < 0 else "보합")
         reason = reasons.get(it["label"])
-        reason_html = f' — {esc(reason)}' if reason else ""
+        word = "상승" if pct > 0 else ("하락" if pct < 0 else "보합")
+        text = reason or f"전일 대비 {pct:+.2f}% {word}"
         link_html = f' <a href="{esc(link)}" target="_blank" rel="noopener">기사보기 ↗</a>' if link else ""
-        rows.append(
-            f'<li><strong>{esc(it["label"])}</strong> · 전일 대비 {pct:+.2f}% {word} '
-            f'({esc(format_like(it["value"], prev_val))} → {esc(it["value"])}){reason_html}{link_html}</li>'
-        )
+        rows.append(f'<li><strong>{esc(it["label"])}</strong> · {esc(text)}{link_html}</li>')
     return f'<ul class="stock-news">{"".join(rows)}</ul>' if rows else ""
 
 
@@ -1209,7 +1204,7 @@ HTML_SHELL = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>데일리 마켓 브리핑 (로컬)</title>
+<title>데일리 마켓 브리핑(클라우드)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
   :root {{
@@ -1233,6 +1228,8 @@ HTML_SHELL = """<!doctype html>
   .eyebrow {{ font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; margin:0 0 10px; }}
   h1.title {{ font-family:var(--font-display); font-weight:700; font-size:clamp(26px,5vw,36px); margin:0 0 8px; }}
   .subtitle {{ color:var(--muted); font-size:14px; margin:0; }}
+  .update-schedule {{ list-style:none; margin:8px 0 0; padding:0; font-size:13px; color:var(--muted); font-family:var(--font-mono); }}
+  .update-schedule li {{ margin:2px 0; }}
 
   .parts-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; margin-bottom:28px; }}
   @media (max-width: 980px) {{
@@ -1293,8 +1290,13 @@ HTML_SHELL = """<!doctype html>
 <div class="wrap">
   <header class="page">
     <p class="eyebrow">KOSPI · KOSDAQ · US MARKETS (CLOUD / FREE)</p>
-    <h1 class="title">데일리 마켓 브리핑</h1>
-    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 · 06:00 전일 마감 요약(최근 AI 예측·실제 정확도) · 08:30 국내 지수·종목 오늘 전망 · 22:00 해외 지수·종목 오늘 전망 (마지막 갱신: {generated_at})</p>
+    <h1 class="title">데일리 마켓 브리핑(클라우드)</h1>
+    <p class="subtitle">GitHub Actions가 평일 하루 세 번 자동 생성 (마지막 갱신: {generated_at})</p>
+    <ul class="update-schedule">
+      <li>· 06:00 전일 마감 요약 (최근 AI 예측·실제 정확도)</li>
+      <li>· 08:30 국내 지수·종목 오늘 전망</li>
+      <li>· 22:00 해외 지수·종목 오늘 전망</li>
+    </ul>
   </header>
   <div class="parts-grid">
 {part_yesterday}
@@ -1302,10 +1304,13 @@ HTML_SHELL = """<!doctype html>
   </div>
   <section class="part" style="margin-bottom:28px;">
     <div class="part-head">
-      <div><p class="label">추세</p><h2>최근 코스피 · 코스닥 흐름</h2></div>
+      <div><p class="label">AI 예측 · 실제 정확도</p><h2>최근 코스피 · 코스닥 흐름 (AI 예측 vs 실제)</h2></div>
       <time></time>
     </div>
-    <div class="part-body">{trend_chart}</div>
+    <div class="part-body">
+      <p class="ai-note">매일 아침 AI가 예측한 등락률(점선 원)을 그날 실제 마감값(실선)과 겹쳐 보여줍니다 -- 원이 실선에 가까울수록 예측이 정확했다는 뜻입니다.</p>
+      {trend_chart}
+    </div>
   </section>
   <footer class="page">
     지수는 실시간 데이터, 뉴스 요약은 헤드라인 기반 AI(또는 규칙기반) 정리입니다. 투자 판단의 책임은 본인에게 있습니다.
