@@ -1289,7 +1289,7 @@ HTML_SHELL = """<!doctype html>
     .accuracy-card {{ padding:12px 14px 14px; }}
   }}
 
-  section.part {{ background:var(--paper-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; }}
+  section.part {{ background:var(--paper-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; min-width:0; }}
   .part-head {{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:20px 24px;
     border-bottom:1px solid var(--line); background:linear-gradient(180deg,var(--gold-soft) 0%,transparent 100%); }}
   .part-head .label {{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--navy-700); margin:0 0 4px; }}
@@ -1298,7 +1298,7 @@ HTML_SHELL = """<!doctype html>
   .part-body {{ padding:22px 24px 26px; }}
 
   .chart-groups {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:18px; margin-bottom:14px; }}
-  .chart-group {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:16px 18px 16px; }}
+  .chart-group {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:16px 18px 16px; min-width:0; overflow:hidden; }}
   .chart-group-head {{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }}
   .chart-group-head h3 {{ margin:0; font-size:15px; font-weight:700; display:flex; align-items:center; gap:8px; }}
   .chart-tag {{ font-family:var(--font-mono); font-size:10.5px; font-weight:500; letter-spacing:.06em; color:var(--gold); border:1px solid var(--gold); border-radius:20px; padding:1px 8px; }}
@@ -1327,7 +1327,7 @@ HTML_SHELL = """<!doctype html>
 
   .ai-note {{ margin:0 0 10px; font-size:11.5px; color:var(--muted); font-style:italic; }}
   .accuracy-grid {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:8px; }}
-  .accuracy-card {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:14px 16px 16px; }}
+  .accuracy-card {{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:14px 16px 16px; min-width:0; }}
   .accuracy-card h4 {{ margin:0 0 8px; font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--navy-950); }}
   .accuracy-table {{ width:100%; border-collapse:collapse; font-size:13px; }}
   .accuracy-table th {{ text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:500; padding:6px 4px; border-bottom:1px solid var(--line); }}
