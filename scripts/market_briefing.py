@@ -970,7 +970,8 @@ def numeric_highlight_list(items, reasons=None, link=None):
 
 
 def chart_group_block(title, tag, items, summary_text, outlook=None, outlook_keys=None,
-                       update_note=None, awaiting_prediction=False, reasons=None, link=None):
+                       update_note=None, awaiting_prediction=False, pending_text=None,
+                       reasons=None, link=None):
     tag_html = f'<span class="chart-tag tag-{tag.lower()}">{esc(tag)}</span>' if tag else ""
     note_html = f'<span class="chart-update-note">{esc(update_note)}</span>' if update_note else ""
     if outlook is not None:
@@ -978,10 +979,14 @@ def chart_group_block(title, tag, items, summary_text, outlook=None, outlook_key
         body = predicted_bar_block(outlook, outlook_keys or [], base_items=items, links=links)
         highlight_html = ""
     elif awaiting_prediction:
-        # 이 그룹의 AI 예측은 아직 안 도는 트리거 몫이다 (예: 해외 지수는 22:00) -- 그 전까지는
-        # 어제 마감 실데이터를 예측인 척 보여주면 혼동만 주므로 빈 칸으로 둔다.
-        when = update_note.replace("매일 ", "").replace(" 갱신", "") if update_note else "다음 갱신"
-        body = f'<p class="chart-empty">아직 예측 전입니다 -- {esc(when)}에 AI 예측으로 업데이트됩니다.</p>'
+        # outlook이 None인 이유는 둘 중 하나다: (1) 이 그룹의 예측은 아직 안 도는 트리거 몫이거나
+        # (예: 해외 지수는 22:00), (2) 이미 돌았어야 할 트리거인데 Gemini 호출이 실패했거나. 어느
+        # 쪽이든 어제 마감 실데이터를 예측인 척(과거형 문장으로) 보여주면 혼동만 주므로 빈 칸으로 둔다.
+        if pending_text:
+            body = f'<p class="chart-empty">{esc(pending_text)}</p>'
+        else:
+            when = update_note.replace("매일 ", "").replace(" 갱신", "") if update_note else "다음 갱신"
+            body = f'<p class="chart-empty">아직 예측 전입니다 -- {esc(when)}에 AI 예측으로 업데이트됩니다.</p>'
         highlight_html = ""
         summary_text = None
     else:
@@ -1001,7 +1006,7 @@ def chart_group_block(title, tag, items, summary_text, outlook=None, outlook_key
 
 
 def stock_group_block(title, items, news_map=None, outlook=None, tag=None,
-                       update_note=None, awaiting_prediction=False):
+                       update_note=None, awaiting_prediction=False, pending_text=None):
     outlook_keys = [(it["code"], it["label"]) for it in items]
     news_map = news_map or {}
     tag_html = f'<span class="chart-tag tag-{tag.lower()}">{esc(tag)}</span>' if tag else ""
@@ -1011,8 +1016,11 @@ def stock_group_block(title, items, news_map=None, outlook=None, tag=None,
         body = predicted_bar_block(outlook, outlook_keys, base_items=items, links=links)
         news_html = ""  # AI 예측의 근거 목록이 이미 뉴스 맥락을 반영하므로 중복 표시하지 않음
     elif awaiting_prediction:
-        when = update_note.replace("매일 ", "").replace(" 갱신", "") if update_note else "다음 갱신"
-        body = f'<p class="chart-empty">아직 예측 전입니다 -- {esc(when)}에 AI 예측으로 업데이트됩니다.</p>'
+        if pending_text:
+            body = f'<p class="chart-empty">{esc(pending_text)}</p>'
+        else:
+            when = update_note.replace("매일 ", "").replace(" 갱신", "") if update_note else "다음 갱신"
+            body = f'<p class="chart-empty">아직 예측 전입니다 -- {esc(when)}에 AI 예측으로 업데이트됩니다.</p>'
         news_html = ""
     else:
         body = svg_dumbbell_group(items)
@@ -1146,11 +1154,16 @@ def render_part(label, part_no, time_label, doc):
     <div class="part-body"><div class="empty">아직 발행된 브리핑이 없습니다.</div></div>
   </section>"""
 
+    # kr/stocks의 예측은 08:30 트리거 자신이 만드는 값이라 "아직 도는 트리거가 안 왔다"는 없다 --
+    # outlook이 None인데 part_no==2라면 Gemini 호출이 실패한 것이므로, 어제 실데이터를 예측인 척
+    # (과거형 문장으로) 보여주는 대신 실패했다는 걸 명확히 알려준다.
+    kr_pending = "AI 예측을 가져오지 못했습니다 (다음 자동 갱신 때 다시 시도합니다)." if part_no == 2 else None
     kr_block = chart_group_block(
         "국내 지수", domestic_session_tag() if part_no == 2 else None, doc["kr"]["items"],
         doc["news"]["domestic"], outlook=doc["kr"].get("outlook"),
         outlook_keys=[("kospi", "코스피"), ("kosdaq", "코스닥")],
         update_note="매일 08:30 갱신" if part_no == 2 else None,
+        awaiting_prediction=(part_no == 2), pending_text=kr_pending,
         reasons=doc["kr"].get("reasons"), link=doc["kr"].get("link"),
     )
     us_block = chart_group_block(
@@ -1168,6 +1181,7 @@ def render_part(label, part_no, time_label, doc):
             "국내 핵심 종목", stocks["items"], stocks["news"], outlook=stocks.get("outlook"),
             tag=domestic_session_tag() if part_no == 2 else None,
             update_note="매일 08:30 갱신" if part_no == 2 else None,
+            awaiting_prediction=(part_no == 2), pending_text=kr_pending,
         )
         if stocks else ""
     )
