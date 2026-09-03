@@ -205,7 +205,7 @@
     "ai_summary": true
   },
   "today": {
-    "updated_at": "2026-09-03 16:34 KST",
+    "updated_at": "2026-09-03 16:45 KST",
     "kr": {
       "status": "CLOSE",
       "items": [
@@ -291,16 +291,16 @@
       ],
       "news": {
         "005930": {
-          "reason": "[특징주] 삼성전자·SK하이닉스, 美 3대 주가 지수 강세.. '상승'",
-          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
+          "reason": "\"삼성전자·하이닉스, 지금 사도 되나요?\" 남들 안 살 때 담아야 하는 이유",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE14c0NuNWRVY0RKOWYzYm1BTm5TOWRRRGdRVXdHNGpxd2hNblJoaG15bV9ZcXVyNVdTTGUxa2lqYVBiTFFsczR3ZmZmdVZOeGFoVzRiNXVTOVdtMGdycUE?oc=5"
         },
         "000660": {
           "reason": "[특징주] 삼성전자·SK하이닉스, 美 3대 주가 지수 강세.. '상승'",
           "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWjVGVF9FMk5LT2dQR1M5aXl0Nmw2TUl0dzZidVVrWjRfRHJlU3hnT3FYczVHSEgwMF9zV0h0X1c3QUU5M1k0LTFsRUo4WUZyOVdCRnExczE1X09sWVpiSUtLbGxIcnMza0hZNlh5MEdBU21rMEg1X0djeUdvSXFoNmVfR0VSa1E?oc=5"
         },
         "373220": {
-          "reason": "“LG에너지솔루션, 당장 큰돈 안 돼도 ESS에 웃는 이유…북미 AMPC 살릴 히든카드”",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBlTVYtMWlaRExVUEpYZzdLSjJuOHZyX1NaSzB5VDlDb3pPM0RsTnNVUFVtUkxRclJERWJLYmxiSl9kUFFsMzk2ME91RldYUGpJNVpfUUQwTmxOTk4wUEUwc3Y2Y29yeGx5SWExMkhfQQ?oc=5"
+          "reason": "LG에너지솔루션 주가, 9월 3일 365,500원 5.18% 상승 마감",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE14WHVWRDF3eW9CM2ZGV1E0SjBjbjRkVzRPaUwyUU1RYlpHbklzZUxVY3V6YXJXX3B5UW5kTzZjWlRNcWpPYlZnVWNqNnU5RnZkZ0NoYm1FX0M5aEpJZHU5SC0zYTlXaDhtRzFMeDNmMXJVZw?oc=5"
         },
         "207940": {
           "reason": "'3조 유증' 삼성바이오로직스, 주주 달래기…\"15조 투자 위한 전략적 선택\"",
@@ -361,8 +361,8 @@
           "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQcXRHWjZmSFV0X3ExMmZGbTFKVm00STF0QlBTbjdQN3hWY3I4SFdJeFg2SDFkSWsyUlVBR2RfdW5RbER5eWpvaEZUbW9JYVdtd1QxRWRUemdXZ1NoVFd2NXUzeXNQUE1kblRpa3ZWS096bnNNdHkzaWFYUDNyTmNydFNtalhBRGlDVnpJ?oc=5"
         },
         "NVDA": {
-          "reason": "엔비디아가 대만 반도체 채권을 산 이유는",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1HbHV6cy1YVEN5SWtIcU12dmFfTWp2c1BHZWFUXzhCd3NmN2pvLWlCazB2a0t2eGFnbGozQVNwanNaRnJ2cEtEUnJ6MGpKbkRFTG9RUWRZZGhjaVRIQUNkX29VMjR3N0hDRENOUEpLeWs?oc=5"
+          "reason": "짐 크레이머, 엔비디아 ‘밸류에이션 저평가’ 지적···대규모 자사주매입 제언",
+          "link": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxQaEZ4c3hlT2ZjeEl3ZF9odWhQdW1wQWlNM0NhdWE3T1NWSHgzb29rN1Fkci02U042N0I3NElMWHk3VWtYS3BkZlhyYlJLSmsxNjAzMEZuQkxQZzY0U3J2ZGFaWmx3QjFONUgzZFg4aHhjV05QcEJfTlYyd2hCVHVENjMwU3dfVjBEX29RMmwwMml6ejZGaXhiMUxaeEw1eDhOUnRMeTV3dUlXemJ6NXBfa2VXeDh5WXN0RncwSGpETE5ESzZxczNzRWxyRXgxUmpUX2g4RjZLN08wWTZxcW5xZXJDRmdSSWo3XzVQUDAtek9xU19LVkE1SFJCV0U1UFVvRHR0WHo5TURaQldFZzdPVjRucFNqeHZOcnN6NGJBM3NxUkJpWWZaMElRUzlYWmtfYnRqVTR2OGk3aXotckxhN29CSjhyUnJO?oc=5"
         },
         "AMZN": {
           "reason": "\"월급만으론 부족\"…주식 받는 직장인 늘었다",
@@ -387,19 +387,18 @@
       "네이트",
       "thefairnews.co.kr",
       "이투데이",
-      "jnilbo.com",
+      "진일보",
       "콕스뉴스",
-      "blockmedia.co.kr",
+      "블록미디어",
       "supple.kr",
-      "edaily.co.kr",
+      "YTN",
       "글로벌이코노믹",
-      "뉴스퀘스트",
-      "v.daum.net",
       "톱스타뉴스",
+      "v.daum.net",
       "코인리더스",
-      "Vietnam.vn",
-      "연합인포맥스",
-      "tv.edaily.co.kr",
+      "vietnam.vn",
+      "Benzinga",
+      "이데일리TV",
       "조선일보"
     ],
     "ai_summary": false
