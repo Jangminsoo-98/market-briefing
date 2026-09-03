@@ -46,6 +46,9 @@
   .chart-group-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
   .chart-group-head h3 { margin:0; font-size:15px; font-weight:700; display:flex; align-items:center; gap:8px; }
   .chart-tag { font-family:var(--font-mono); font-size:10.5px; font-weight:500; letter-spacing:.06em; color:var(--gold); border:1px solid var(--gold); border-radius:20px; padding:1px 8px; }
+  .chart-tag.tag-open { color:var(--chart-up); border-color:var(--chart-up); }
+  .chart-tag.tag-soon { color:var(--muted); border-color:var(--muted); }
+  .chart-tag.tag-end { color:var(--muted); border-color:var(--line); opacity:.7; }
   .chart-summary { margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line); font-size:14px; color:var(--navy-700); }
   .bar-chart, .trend-chart { width:100%; height:auto; display:block; }
   .chart-cat { font-size:13.5px; font-weight:600; fill:var(--navy-950); font-family:var(--font-body); }
@@ -84,7 +87,7 @@
   <header class="page">
     <p class="eyebrow">KOSPI · KOSDAQ · US MARKETS (LOCAL / FREE)</p>
     <h1 class="title">데일리 마켓 브리핑</h1>
-    <p class="subtitle">평일 오전 6시 · 8시, 이 PC의 작업 스케줄러가 자동 생성 (마지막 갱신: 2026-09-03 13:56)</p>
+    <p class="subtitle">평일 오전 6시 · 8시, 이 PC의 작업 스케줄러가 자동 생성 (마지막 갱신: 2026-09-03 14:09)</p>
   </header>
   <div class="parts-grid">
 
@@ -139,7 +142,7 @@
       <div class="chart-groups">
       <div class="chart-group">
         <div class="chart-group-head">
-          <h3>국내 지수<span class="chart-tag">OPEN</span></h3>
+          <h3>국내 지수<span class="chart-tag tag-open">OPEN</span></h3>
         </div>
         <p class="outlook-disclaimer">AI 예측치 · 점선/반투명/기울임 표시 · 전일 종가에 예상 등락률을 적용해 역산한 참고용 도달가이며 확정된 사실이 아닙니다</p><svg viewBox="0 0 664 144" class="bar-chart" role="img" aria-label="전일 대비 가격 변동"><line x1="373.0" y1="2" x2="373.0" y2="142" class="chart-baseline"/><g><text x="78" y="31.0" text-anchor="end" class="chart-cat">코스피</text><rect x="373.0" y="12" width="259.0" height="28" rx="4" fill="var(--chart-up)" fill-opacity="0.55" stroke="var(--chart-up)" stroke-width="1.5" stroke-dasharray="5 3"><title>코스피 6,701.02 (+33.34, +0.50%) · AI 예측 도달가</title></rect><text x="622.0" y="31.0" text-anchor="end" class="chart-val-inside predicted" style="font-size:15px">+0.50%</text><text x="106.0" y="56.0" text-anchor="start" class="chart-val-sub predicted">6,667.68 → 6,701.02 (+33.34)</text></g><g><text x="78" y="95.0" text-anchor="end" class="chart-cat">코스닥</text><rect x="269.4" y="76" width="103.6" height="28" rx="4" fill="var(--chart-down)" fill-opacity="0.55" stroke="var(--chart-down)" stroke-width="1.5" stroke-dasharray="5 3"><title>코스닥 801.61 (-1.61, -0.20%) · AI 예측 도달가</title></rect><text x="279.4" y="95.0" text-anchor="start" class="chart-val-inside predicted" style="font-size:15px">-0.20%</text><text x="106.0" y="120.0" text-anchor="start" class="chart-val-sub predicted">803.22 → 801.61 (-1.61)</text></g></svg><ul class="stock-news"><li><strong>코스피</strong> · 반도체 훈풍과 미 국채금리 진정에 힘입어 상승 흐름을 보일 것으로 예상됩니다.</li><li><strong>코스닥</strong> · 개별 종목 장세가 심화되는 가운데 코스닥은 제한적인 등락을 보일 것입니다.</li></ul>
         
@@ -147,7 +150,7 @@
       </div>
       <div class="chart-group">
         <div class="chart-group-head">
-          <h3>해외 지수 (미국)</h3>
+          <h3>해외 지수 (미국)<span class="chart-tag tag-soon">SOON</span></h3>
         </div>
         <svg viewBox="0 0 664 208" class="bar-chart" role="img" aria-label="전일 대비 가격 변동"><line x1="373.0" y1="2" x2="373.0" y2="206" class="chart-baseline"/><g><text x="78" y="31.0" text-anchor="end" class="chart-cat">다우존스</text><rect x="114.0" y="12" width="259.0" height="28" rx="4" fill="var(--chart-down)"><title>다우존스 53,061.95 (-401.93, -0.75%)</title></rect><text x="124.0" y="31.0" text-anchor="start" class="chart-val-inside" style="font-size:15px">-0.75%</text><text x="106.0" y="56.0" text-anchor="start" class="chart-val-sub">53,463.88 → 53,061.95 (-401.93)</text></g><g><text x="78" y="95.0" text-anchor="end" class="chart-cat">S&amp;P500</text><rect x="331.6" y="76" width="41.4" height="28" rx="4" fill="var(--chart-down)"><title>S&amp;P500 7,666.60 (-9.10, -0.12%)</title></rect><text x="323.6" y="95.0" text-anchor="end" class="chart-val" style="font-size:15px">-0.12%</text><text x="106.0" y="120.0" text-anchor="start" class="chart-val-sub">7,675.70 → 7,666.60 (-9.10)</text></g><g><text x="78" y="159.0" text-anchor="end" class="chart-cat">나스닥</text><rect x="373.0" y="140" width="117.4" height="28" rx="4" fill="var(--chart-up)"><title>나스닥 26,217.83 (+87.63, +0.34%)</title></rect><text x="480.4" y="159.0" text-anchor="end" class="chart-val-inside" style="font-size:15px">+0.34%</text><text x="106.0" y="184.0" text-anchor="start" class="chart-val-sub">26,130.20 → 26,217.83 (+87.63)</text></g></svg>
         <ul class="stock-news"><li><strong>다우존스</strong> · 전일 대비 -0.75% 하락 (53,463.88 → 53,061.95)</li><li><strong>S&amp;P500</strong> · 전일 대비 -0.12% 하락 (7,675.70 → 7,666.60)</li><li><strong>나스닥</strong> · 전일 대비 +0.34% 상승 (26,130.20 → 26,217.83)</li></ul>
